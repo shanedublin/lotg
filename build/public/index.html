@@ -17,22 +17,23 @@
 
 <h1>Luck Of The Gods</h1>
 <p>This is a game about domination</p>
-{{9+9+27}}
-<br>
-Give me all your money! hm
 
 
 <div ui-view></div>
 
 
-
-
+<!-- footer -->
+<div><a href="#/about">About</a></div>
  	<!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endinject -->
     <!-- inject:js -->
     <script src="app.modules.js"></script>
+    <script src="hero/hero.routes.js"></script>
+    <script src="hero/hero.modules.js"></script>
+    <script src="hero/hero.controller.js"></script>
     <script src="app.routes.js"></script>
     <script src="app.controller.js"></script>
     <!-- endinject -->

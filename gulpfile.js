@@ -28,7 +28,7 @@ gulp.task('default',['start']);
 
 
 
-gulp.task('browser-sync',['dev'],function(){
+gulp.task('browser-sync',function(){
 	browserSync.init({
 		server:{
 			baseDir:config.publicFolder
@@ -60,33 +60,44 @@ gulp.task('src-dist',function(){
 
 
 gulp.task('js-hint',function(){
-  return gulp.src(config.sourcFolder+'/**/*.js')
+  return gulp.src('src/**/*.js')
   .pipe(jshint())
   .pipe(jshint.reporter(logger));
 });
 
 gulp.task('clean',function clean(){
-	return del(['build/**','!build']);
+	return del(['!build/public','build/public/**']);
 });
 
 
 gulp.task('dev',dev);
 
-function dev(){
-	return runSequence('clean','js-hint','index-inject','src-dist','bower-dist');
+function dev(callback){
+	console.log('Running Dev Build');
+	if(callback !== null && callback !== undefined){
+		return runSequence('clean','js-hint','index-inject','src-dist','bower-dist',callback);
+		
+	}else{
+		return runSequence('clean','js-hint','index-inject','src-dist','bower-dist');
+	}
 }
 
 gulp.task('start',['browser-sync'],function(){	
-	
+			dev(browserSync.reload);
 	nodemon({
 		script:'src/server/app.js',
 		ext: 'js html',
+		ignore : [
+		          'bower_components/',
+		          'node_modules/',
+		          'build/'
+		          ],
 		env: {'NODE_ENV': 'developement'}
 			
 	}).on('restart',function(){
-		dev();
+		dev(browserSync.reload);
 	})
 	.on('start',function(){		
-		browserSync.reload();
+		//browserSync.reload();
 	});
 });

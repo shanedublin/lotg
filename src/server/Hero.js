@@ -9,7 +9,7 @@ Hero.get('/',function(req,res){
 			health : 1
 	};
 	res.send(hero);
-})
+});
 
 
 

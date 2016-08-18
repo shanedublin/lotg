@@ -1,4 +1,4 @@
 (function(){
   'use-strict';
-      angular.module('lotg', ['ui.router','rusd.input']);
+      angular.module('lotg', ['ui.router','lotg.hero']);
 })();
