@@ -1,0 +1,9 @@
+{
+  "name": "LOTG",
+  "version": "0.0.0",
+  "author": "rushanedublin <rushanedublin@gmail.com>",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-ui-router": "ui-router#^0.3.1"
+  }
+}
