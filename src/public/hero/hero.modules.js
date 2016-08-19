@@ -1,4 +1,4 @@
 (function(){
   'use-strict';
-      angular.module('lotg.hero', ['ui.router']);
+      angular.module('lotg.hero', ['ui.router','lotg.header']);
 })();

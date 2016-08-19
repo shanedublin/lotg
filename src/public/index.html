@@ -14,16 +14,13 @@
 </head>
 <body ng-app="lotg" ng-controller="mainController as main">
 
-
-<h1>Luck Of The Gods</h1>
-<p>This is a game about domination</p>
-
+<lotg-header></lotg-header>
 
 <div ui-view></div>
 
 
-<!-- footer -->
-<div><a href="#/about">About</a></div>
+<div ng-include="'/header/footer.html'"></div>
+
  	<!-- bower:js -->
     <!-- bower installed scripts will go here... -->
     <!-- endinject -->
