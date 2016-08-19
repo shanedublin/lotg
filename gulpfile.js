@@ -19,6 +19,15 @@ function logError(error){
 	  this.emit('end');
 }
 
+var mainBowerOverrides = {
+		  overrides:{
+			  bootstrap:{
+				  main:['./dist/js/bootstrap.js',
+				       './dist/css/bootstrap.min.css',
+				       './dist/fonts/*.*']
+			  }
+		  }
+	  	};
 function logger(msg){
 	  console.log(msg);
 }
@@ -32,13 +41,18 @@ gulp.task('browser-sync',function(){
 	browserSync.init({
 		server:{
 			baseDir:config.publicFolder
+		},		
+		port: 3000,
+		ui: {
+			port: 3002
 		}
+		
 	});
 });
 
 gulp.task('index-inject',function build(){
 	gulp.src(config.index)
-	.pipe(inject(gulp.src(mainBowerFiles(),{read:false}),{name: 'bower'}))
+	.pipe(inject(gulp.src(mainBowerFiles(mainBowerOverrides),{read:false}),{name: 'bower'}))
 	.pipe(inject(gulp.src('./src/public/**/*.js').pipe(angularFilesort()), {relative:true}))
 	.pipe(inject(gulp.src('./src/public/**/*.css'), {relative:true}))
   	.on('error',logError)
@@ -48,7 +62,7 @@ gulp.task('index-inject',function build(){
 
 
 gulp.task('bower-dist', function(){
-  return gulp.src(mainBowerFiles(),{base:'bower_components'})
+  return gulp.src(mainBowerFiles(mainBowerOverrides),{base:'bower_components'})
   .pipe(gulp.dest(config.buildFolder+'/bower_components'));
 });
 
