@@ -2,11 +2,14 @@
   'use-strict';
 
   angular.module('lotg').config(function($stateProvider, $urlRouterProvider){
-      console.log("loaded");
-      $urlRouterProvider.otherwise("/home");
+      console.log("Main Routes Loaded");
+      //$urlRouterProvider.otherwise("/home");
       $stateProvider.state('home',{
         url:"/home",
-        templateUrl:'/app/home/home.html',
+        templateUrl:'/home/home.html',
+      }).state('about',{
+    	  url:'/about',
+    	  templateUrl:'/about/about.html'
       });
 
   });

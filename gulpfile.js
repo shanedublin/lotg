@@ -19,6 +19,15 @@ function logError(error){
 	  this.emit('end');
 }
 
+var mainBowerOverrides = {
+		  overrides:{
+			  bootstrap:{
+				  main:['./dist/js/bootstrap.js',
+				       './dist/css/bootstrap.min.css',
+				       './dist/fonts/*.*']
+			  }
+		  }
+	  	};
 function logger(msg){
 	  console.log(msg);
 }
@@ -28,17 +37,22 @@ gulp.task('default',['start']);
 
 
 
-gulp.task('browser-sync',['dev'],function(){
+gulp.task('browser-sync',function(){
 	browserSync.init({
 		server:{
 			baseDir:config.publicFolder
+		},		
+		port: 3000,
+		ui: {
+			port: 3002
 		}
+		
 	});
 });
 
 gulp.task('index-inject',function build(){
 	gulp.src(config.index)
-	.pipe(inject(gulp.src(mainBowerFiles(),{read:false}),{name: 'bower'}))
+	.pipe(inject(gulp.src(mainBowerFiles(mainBowerOverrides),{read:false}),{name: 'bower'}))
 	.pipe(inject(gulp.src('./src/public/**/*.js').pipe(angularFilesort()), {relative:true}))
 	.pipe(inject(gulp.src('./src/public/**/*.css'), {relative:true}))
   	.on('error',logError)
@@ -48,7 +62,7 @@ gulp.task('index-inject',function build(){
 
 
 gulp.task('bower-dist', function(){
-  return gulp.src(mainBowerFiles(),{base:'bower_components'})
+  return gulp.src(mainBowerFiles(mainBowerOverrides),{base:'bower_components'})
   .pipe(gulp.dest(config.buildFolder+'/bower_components'));
 });
 
@@ -60,33 +74,44 @@ gulp.task('src-dist',function(){
 
 
 gulp.task('js-hint',function(){
-  return gulp.src(config.sourcFolder+'/**/*.js')
+  return gulp.src('src/**/*.js')
   .pipe(jshint())
   .pipe(jshint.reporter(logger));
 });
 
 gulp.task('clean',function clean(){
-	return del(['build/**','!build']);
+	return del(['!build/public','build/public/**']);
 });
 
 
 gulp.task('dev',dev);
 
-function dev(){
-	return runSequence('clean','js-hint','index-inject','src-dist','bower-dist');
+function dev(callback){
+	console.log('Running Dev Build');
+	if(callback !== null && callback !== undefined){
+		return runSequence('clean','js-hint','index-inject','src-dist','bower-dist',callback);
+		
+	}else{
+		return runSequence('clean','js-hint','index-inject','src-dist','bower-dist');
+	}
 }
 
 gulp.task('start',['browser-sync'],function(){	
-	
+			dev(browserSync.reload);
 	nodemon({
 		script:'src/server/app.js',
 		ext: 'js html',
+		ignore : [
+		          'bower_components/',
+		          'node_modules/',
+		          'build/'
+		          ],
 		env: {'NODE_ENV': 'developement'}
 			
 	}).on('restart',function(){
-		dev();
+		dev(browserSync.reload);
 	})
 	.on('start',function(){		
-		browserSync.reload();
+		//browserSync.reload();
 	});
 });
