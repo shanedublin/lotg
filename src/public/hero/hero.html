@@ -1,1 +1,47 @@
 <h1 class="text-center">Look at all these Heroes!</h1>
+
+<div class="container">
+		<div class="panel panel-default" ng-repeat="item in hero.list" ng-init="item.expanded = true" >
+			<div ng-if="item.expanded !== true" class="panel-body">			
+			<h3><a href="" ng-click="item.expanded = !item.expanded">{{item.name}}</a></h3>
+			</div>
+			
+			
+			<div ng-if="item.expanded === true" class="panel-body">
+			<h3><a href="" ng-click="item.expanded = !item.expanded">{{item.name}}</a></h3>
+			<div class="row">
+				<div class="col-md-5">
+					<img src="hate">
+					<p>{{item.description}}</p>
+				</div>
+					
+				<div class="col-md-3">				
+					<h3>Statistics</h3>					
+					<label>Health:</label>
+					{{item.defense}}
+					<br>
+					<label>Range: </label>
+					{{item.range}}
+					
+					<label>Attack:</label>
+					{{item.attack}}
+					<br>
+					<label>Defense</label>
+					{{item.defense}}				
+				</div>
+				
+				<div class="col-md-4">
+					<h3>Abilities</h3>
+					<div ng-repeat="power in item.powers">
+					<label>{{power.name}}: </label> 
+					{{power.description}}
+					</div>
+				</div>
+				
+			</div>
+			
+			
+			
+			</div>
+		</div>		
+</div>
