@@ -42,7 +42,7 @@ gulp.task('browser-sync',function(){
 		server:{
 			baseDir:config.publicFolder
 		},		
-		port: 3000,
+		port: 3001,
 		ui: {
 			port: 3002
 		}
