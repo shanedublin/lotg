@@ -11,7 +11,10 @@
       }).state('hero-edit',{
     	  url:'/hero/edit',
     	  templateUrl:'/hero/hero.edit.html',
-    	  controller: 'heroEditController as heroEdit'
+    	  controller: 'heroEditController as heroEdit',
+    	  params: {
+    		  hero: null
+    	  }
       });     
 
   }).run(function(headerFactory){

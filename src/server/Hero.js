@@ -8,7 +8,7 @@ var seq = new Sequelize(...config.databaseConnection);
 
 var seqHero = seq.define('hero',{	
 	id:{
-		type: Sequelize.BIGINT, primaryKey: true, autoIncrement: true
+		type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true,field: 'id'
 	},
 	name:{
 		type: Sequelize.STRING
@@ -75,6 +75,29 @@ Hero.post('/',function(req,res){
 	});
 	
 
+});
+
+Hero.post('/delete',function(req,res){
+	var h = req.body;
+	console.log(h);
+	if(isNaN(parseInt(h.id))){
+		res.status(400).send("Can't send null!");
+		return;
+	}
+	
+	seqHero.findById(parseInt(h.id)).then(function(hero){
+		if(hero === null){
+			seqHero.create(h).then(function(hero){
+			});
+			res.send(false);
+		}else{
+			
+			hero.destroy().then(function(hero){
+				res.send(true);
+			});
+		}
+	});
+	
 });
 
 
