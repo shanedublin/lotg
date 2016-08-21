@@ -9,9 +9,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+  	"body-parser": "^1.15.2",		
+    "express": "^4.14.0",
+    "pg": "^6.1.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.24.1"
   },
   "devDependencies": {
+    
     "browser-sync": "^2.14.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
@@ -22,6 +27,7 @@
     "jshint": "^2.9.2",
     "main-bower-files": "^2.13.1",
     "nodemon": "^1.10.0",
+    
     "run-sequence": "^1.2.2"
   }
 }

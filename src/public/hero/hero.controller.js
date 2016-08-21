@@ -1,6 +1,6 @@
 (function(){
 	'use-strict';
-	angular.module('lotg.hero').controller('heroController',function(){
+	angular.module('lotg.hero').controller('heroController',function(configService,$http){
 		console.log('hero Controller loaded');
 		var vm = this;
 		
@@ -19,7 +19,15 @@
 		vm.createNewHero({name: 'Keplar The stealth Elf', attack: 6, defense: 1, life: 1,range:2});
 		vm.createNewHero({name: 'Logan The Salty', attack: 9, defense: 0, life: 5,range:2});
 		
-		
+		vm.loadHeros = function(){
+			//console.log(configService.nodeAddress);
+			$http.get(configService.nodeAddress + '/hero').then(function(value){
+				//console.log(value.data);
+				vm.list = value.data;
+				
+			});
+		};
+		vm.loadHeros();
 		
 	});
 })();

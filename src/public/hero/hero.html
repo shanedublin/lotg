@@ -1,7 +1,8 @@
 <h1 class="text-center">Look at all these Heroes!</h1>
+<h3 class="text-center"><a href="#/hero/edit">Create New Hero</a></h3>
 
 <div class="container">
-		<div class="panel panel-default" ng-repeat="item in hero.list" ng-init="item.expanded = true" >
+		<div class="panel panel-default" ng-repeat="item in hero.list | orderBy: item.id" ng-init="item.expanded = true" >
 			<div ng-if="item.expanded !== true" class="panel-body">			
 			<h3><a href="" ng-click="item.expanded = !item.expanded">{{item.name}}</a></h3>
 			</div>
@@ -11,7 +12,7 @@
 			<h3><a href="" ng-click="item.expanded = !item.expanded">{{item.name}}</a></h3>
 			<div class="row">
 				<div class="col-md-5">
-					<img src="hate">
+					<img src="">
 					<p>{{item.description}}</p>
 				</div>
 					
@@ -22,7 +23,7 @@
 					<br>
 					<label>Range: </label>
 					{{item.range}}
-					
+					<br>
 					<label>Attack:</label>
 					{{item.attack}}
 					<br>

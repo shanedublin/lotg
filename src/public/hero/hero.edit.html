@@ -1,1 +1,111 @@
- <h1>Edit Your hero</h1>
+
+ 
+ <div class="col-md-4 col-md-offset-4" style="margin-bottom: 80px;">
+ 
+ 
+ 	<div class="panel panel-default">
+	<div class="panel-heading">
+		<h1>Edit Hero {{heroEdit.h.id}}</h1>
+	</div>
+ 
+ 	<div class="panel-body">
+ 	
+ 	<div class="form-horizontal">
+ 	
+ 	
+ 	
+ 	
+ 	<div class="form-group">
+	 	<label class="control-label col-md-3">Name</label>
+	 	<div class="col-md-9" >
+	 		<input class="form-control" ng-model="heroEdit.h.name">
+	 	</div>
+ 	</div>
+ 	<div class="form-group">
+	 	
+	 	<label class="control-label col-md-3">Description</label>
+	 	<div class="col-md-9" >
+	 		<textarea rows="3" class="form-control" ng-model="heroEdit.h.description"></textarea>
+	 	</div>
+ 	</div>
+ 	
+ 	<div class="form-group">
+	 	
+	 	<label class="control-label col-md-3">Attack</label>
+	 	<div class="col-md-3" >
+	 		<input class="form-control" type="number" ng-model="heroEdit.h.attack">
+	 	</div>
+	 	<label class="control-label col-md-3">Defense</label>
+	 	<div class="col-md-3" >
+	 		<input class="form-control" type="number" ng-model="heroEdit.h.defense">
+	 	</div>
+ 	</div>
+ 	<div class="form-group">
+	 	
+ 	</div>
+ 	<div class="form-group">
+	 	<label class="control-label col-md-3">Move</label>
+	 	<div class="col-md-3" >
+	 		<input class="form-control" type="number" ng-model="heroEdit.h.move">
+	 	</div>
+	 	
+	 	<label class="control-label col-md-3">Range</label>
+	 	<div class="col-md-3" >
+	 		<input class="form-control" type="number" ng-model="heroEdit.h.range">
+	 	</div>
+ 	</div>
+ 	
+ 	<div class="form-group">
+	 	<label class="control-label col-md-3">Soul points</label>
+	 	<div class="col-md-3" >
+	 		<input class="form-control" type="number" ng-model="heroEdit.h.points">
+	 	</div>
+	 	
+<!-- 	 	<label class="control-label col-md-3">Range</label> -->
+<!-- 	 	<div class="col-md-3" > -->
+<!-- 	 		<input class="form-control" type="number" ng-model="heroEdit.h.range"> -->
+<!-- 	 	</div> -->
+ 	</div>
+ 	
+ 	<div class="form-group">
+ 		<div class="col-md-12">
+ 			<button class="btn btn-success pull-right" ng-click="heroEdit.addPower({})">Power <span class="glyphicon glyphicon-plus" ></span></button>
+ 		</div>
+ 	</div>
+ 	<div class="form-group" ng-repeat="power in heroEdit.h.powers">
+<!-- 	 	<label class="control-label col-md-3">power.name</label> -->
+	 	<div class="col-md-3">
+	 		<input class="form-control" ng-model="power.name">
+	 	</div>
+	 	<div class="col-md-7" >
+	 		<textarea rows="2" class="form-control" ng-model="power.description"></textarea>
+	 	</div>
+	 	<div class="col-md-2">
+	 		<button class="btn btn-danger" ng-click="heroEdit.removePower(power)"> <span class="glyphicon glyphicon-minus" ></span></button>
+	 	</div>
+	 	
+ 	</div>
+ 	
+ 	
+ 	
+ 	
+ 	<div class="form-group">
+ 		<div class="col-md-6">
+ 			<button class="btn btn-warning pull-left">Cancel</button> 	
+ 		</div>
+ 		<div class="col-md-6">
+	 		<button class="btn btn-primary pull-right" ng-click="heroEdit.saveHero()">Save</button>
+ 		</div>
+ 	</div>
+ 	
+	 	
+ 	</div>
+ 	
+ 	</div>
+ 
+ </div>
+ </div>
+ 
+ <div class="col-md-4">
+ <pre>{{heroEdit.h |json}}</pre>
+ </div>

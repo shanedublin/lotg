@@ -75,7 +75,7 @@ gulp.task('src-dist',function(){
 
 gulp.task('js-hint',function(){
   return gulp.src('src/**/*.js')
-  .pipe(jshint())
+  .pipe(jshint({esversion: 6}))
   .pipe(jshint.reporter(logger));
 });
 

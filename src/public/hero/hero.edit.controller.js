@@ -1,23 +1,46 @@
 (function(){
 	'use-strict';
-	angular.module('lotg.hero').controller('heroEditController',function(){
+	angular.module('lotg.hero').controller('heroEditController',function($http,configService){
 		console.log('hero Edit Controller loaded');
 		var vm = this;
 		
-		vm.list = [];
+		vm.h = {};		
 		
-		vm.createNewHero = function(hero){
-			vm.list.push(hero);
+		vm.saveHero = function(){
+			console.log(vm.h);
+			$http.post(configService.nodeAddress+'/hero',vm.h)
+			.then(function(value){
+				angular.copy(value.data,vm.h);
+				console.log(value.data);
+			});
 		};
 		
-		vm.createNewHero({name: 'Lidar The Keen', attack: 6, defense: 5, life: 4,
-			powers: [{name: 'Aware', description:'Lidar adds plus 1 to his defense when receiving damage from a non adjacent unit'}],
-			description: 'Lidar is an ultra awareing being. He seems to alway know stuff.'
-		});
 		
-		vm.createNewHero({name: 'N-Droid 45', attack: 6, defense: 8, life: 3});
-		vm.createNewHero({name: 'Keplar The stealth Elf', attack: 6, defense: 1, life: 1});
-		vm.createNewHero({name: 'Logan The Salty', attack: 9, defense: 0, life: 5});
+		
+		vm.addPower = function(power){
+			if(vm.h.powers === undefined){
+				vm.h.powers = [];
+			}
+			if( typeof power === 'object'){
+				vm.h.powers.push(power);				
+			}
+				
+		};
+		
+		vm.removePower =function(power){
+			if(vm.h.powers === undefined){
+				return;
+			}
+			
+			if(typeof power === 'object'){
+				let i = vm.h.powers.indexOf(power);
+				if(i >= 0){
+					vm.h.powers.splice(i,1);
+				}
+				
+			}
+			
+		};
 		
 		
 		
