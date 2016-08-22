@@ -4,11 +4,11 @@
   angular.module('lotg.hero').config(function($stateProvider, $urlRouterProvider){
       console.log("Hero Routes Loaded");
       
-      $stateProvider.state('hero',{
-        url:"/hero",
-        templateUrl:'/hero/hero.html',
-        controller: 'heroController as hero'
-      }).state('hero-edit',{
+      $stateProvider.state('heroList',{
+        url:"/hero/list",
+        templateUrl:'/hero/hero.list.html',
+        controller: 'heroListController as heroList'
+      }).state('heroEdit',{
     	  url:'/hero/edit',
     	  templateUrl:'/hero/hero.edit.html',
     	  controller: 'heroEditController as heroEdit',
@@ -18,7 +18,7 @@
       });     
 
   }).run(function(headerFactory){
-	  headerFactory.addLink({name:'Heroes',url:'#/hero'});
+	  headerFactory.addLink({name:'Heroes',url:'#/hero/list'});
 	  console.log('wow');
   });
 

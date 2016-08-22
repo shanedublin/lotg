@@ -31,12 +31,26 @@
 		};
 		
 		
+		/**
+		 * adds a power to the hero, 
+		 * if the hero already has an id 
+		 * send a message to the back to add
+		 * new power
+		 */ 
 		vm.addPower = function(power){
+			
 			if(vm.h.powers === undefined){
 				vm.h.powers = [];
 			}
-			if( typeof power === 'object'){
-				vm.h.powers.push(power);				
+			if(vm.h.id === null || vm.h.id === undefined){
+				vm.h.powers.push(power);
+			}else{
+				
+			power.hero_id = parseInt(vm.h.id);
+			
+				$http.post(configService.nodeAddress+'/hero/power',power).then(function(value){
+					vm.h.powers.push(value.data);							
+				});			
 			}
 				
 		};
@@ -48,9 +62,15 @@
 			
 			if(typeof power === 'object'){
 				let i = vm.h.powers.indexOf(power);
-				if(i >= 0){
-					vm.h.powers.splice(i,1);
-				}
+				$http.post(configService.nodeAddress + '/hero/power/delete',power).then(function(value){
+					if(value){
+						if(i >= 0){
+							vm.h.powers.splice(i,1);
+						}
+					}else{
+						console.log('Error');
+					}
+				});
 				
 			}
 			

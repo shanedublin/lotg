@@ -27,6 +27,7 @@ config.databaseConnection =['lotg','shane','hate', {
 config.defaultSequelizeSettings = {
 		timestamps: false,
 		freezeTableName: true,
+		underscored: true
 }
 
 

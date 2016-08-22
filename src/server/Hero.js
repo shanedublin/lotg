@@ -3,50 +3,14 @@
 var express = require('express');
 var Hero = express.Router();
 var config = require('../../config.js');
-var Sequelize = require('sequelize');
-var seq = new Sequelize(...config.databaseConnection);
-
-var seqHero = seq.define('hero',{	
-	id:{
-		type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true,field: 'id'
-	},
-	name:{
-		type: Sequelize.STRING
-	},
-	description:{
-		type: Sequelize.STRING
-	},
-	health:{
-		type: Sequelize.INTEGER
-	},
-	attack:{
-		type: Sequelize.INTEGER
-	},
-	range:{
-		type: Sequelize.INTEGER
-	},
-	points:{
-		type: Sequelize.INTEGER
-	},
-	defense:{
-		type: Sequelize.INTEGER
-	},
-	move:{
-		type: Sequelize.INTEGER
-	}
-},config.defaultSequelizeSettings);
-
-//seqHero.sync().then(function(data){
-//	//console.log(data);
-//	return seqHero.create({
-//		name: 'hate3',
-//		description: 'Best ever'
-//	}) ;
-//});
+var orm = require('./orm.js');
+var ormHero = orm.Hero;
 
 Hero.get('/',function(req,res){
 	
-	seqHero.findAll({raw:true}).then(function(data){
+	ormHero.findAll({
+		include:[{model: orm.Power, as: 'powers'}]
+	}).then(function(data){
 		res.send(data);
 	}).catch(function(err){
 		console.log(err);
@@ -54,27 +18,89 @@ Hero.get('/',function(req,res){
 	
 });
 
+/**
+ * Updates the Hero. 
+ * This is really a hack on cascade saving. 
+ * It updates if it can find A match on the Hero power...
+ * There has got to be a better way to do this but i can't find it. * 
+ */
 Hero.post('/',function(req,res){
 	
-	///console.log(JSON.parse(req.body));
-	//console.log(req.body);
 	var h = req.body;
-	//console.log(h);
-	
-	
-	seqHero.findOne({where:{id: h.id}}).then(function(hero){
+		
+	ormHero.findOne({where:{id: h.id}, include:[{model: orm.Power, as: 'powers'}]}).then(function(hero){
 		if(hero === null){
-			seqHero.create(h).then(function(hero){
-				res.send(hero.dataValues);
+			ormHero.create(h,{
+				include:[{model: orm.Power, as: 'powers'}]
+			}).then(function(hero){
+				res.send(hero);
 			});
 		}else{
-			hero.update(h).then(function(hero){
-				res.send(hero.dataValues);
+			for(let i = 0; i < hero.powers.length; i ++){
+				let oldPower = hero.powers[i];
+				
+				for(let j = 0; j < h.powers.length; j ++){
+					let newPower = h.powers[j];
+					if(newPower.id === oldPower.id && newPower.hero_id === parseInt(hero.id)){
+						oldPower.update(newPower);
+						break;
+					}
+				}
+				
+			}
+			
+			hero.update(h).then(function(updatedHero){
+				res.send(updatedHero);			
+				
 			});
 		}
 	});
 	
 
+});
+
+Hero.post('/power/delete',function(req,res){
+	var p = req.body;
+	
+	if(isNaN(parseInt(p.id))){
+		res.status(400).send('Can\'t deleted Null!');
+		return;
+	}
+	
+	orm.Power.findById(parseInt(p.id)).then(function(power){
+		if(power === null){
+			res.send(false);
+		}else{
+			power.destroy().then(function(){
+				res.send(true);
+			});
+		}
+	});
+	
+	
+});
+
+Hero.post('/power',function(req,res){
+	var p = req.body;
+	if(p === null){
+		res.status(400).send('Can\'t save Null!');
+		return;
+	}
+	
+	orm.Power.findById(p.id).then(function(power){
+		if(power === null){			
+			orm.Power.create(p).then(function(newPower){
+				res.send(newPower);
+			});
+		}else{
+			power.update(p).then(function(updatedPower){
+				res.send(updatedPower);
+			});
+		}
+		
+	});
+	
+		
 });
 
 Hero.post('/delete',function(req,res){
@@ -85,13 +111,10 @@ Hero.post('/delete',function(req,res){
 		return;
 	}
 	
-	seqHero.findById(parseInt(h.id)).then(function(hero){
-		if(hero === null){
-			seqHero.create(h).then(function(hero){
-			});
+	ormHero.findById(parseInt(h.id)).then(function(hero){
+		if(hero === null){			
 			res.send(false);
-		}else{
-			
+		}else{			
 			hero.destroy().then(function(hero){
 				res.send(true);
 			});
@@ -100,34 +123,7 @@ Hero.post('/delete',function(req,res){
 	
 });
 
-
-function test(){
-//	seqHero.findAll({raw:true}).then(function(value) {
-//		console.log(value);
-//	});
-	seqHero.findOne({where:{id:7}}).then(function(res){
-		console.log(res);
-		if(res === null){
-			seqHero.create({name:'Omega Turd', description: 'You\'ll need to flush twice'}).then(function(data){
-				//console.log(data);
-			});
-		}else{
-			res.name= "WOWOW 123";
-			res.save();
-			
-		}
-	});
-//	seqHero.create({	
-//		id: 6,
-//		name: 'hate3',
-//		description: 'Best ever'
-//	}) ;
-	
-}
-
-//test();
 console.log('Server Hero Init');
-
 
 
 
