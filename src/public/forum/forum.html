@@ -1,1 +1,32 @@
-Magic Forum
+<div class="col-md-8 col-md-offset-2">
+	<h1>LOTG</h1>
+	<div class="well">
+		<div class="row">
+			<div class="col-md-4 " ng-repeat="item in forum.lotg">			
+				<div class="panel panel-default forum-hover"  >
+	 				<div class="panel-body" ng-class="item.clazz">
+						<strong style="font-size: 120%;">{{item.title}} </strong>
+						{{item.description}}		
+	 				</div>
+				</div>
+			</div>		
+		</div>	
+	</div>
+	
+	
+	<h1>Other</h1>
+
+	<div class="well">
+		<div class="row">
+			<div class="col-md-4 " ng-repeat="item in forum.other">			
+				<div class="panel panel-default forum-hover"  >
+	 				<div class="panel-body" ng-class="item.clazz">
+						<strong style="font-size: 120%;">{{item.title}} </strong>
+						{{item.description}}		
+	 				</div>
+				</div>
+			</div>		
+		</div>	
+	</div>
+
+</div>

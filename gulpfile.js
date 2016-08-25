@@ -100,7 +100,7 @@ gulp.task('start',['browser-sync'],function(){
 			dev(browserSync.reload);
 	nodemon({
 		script:'src/server/app.js',
-		ext: 'js html',
+		ext: 'js html css',
 		ignore : [
 		          'bower_components/',
 		          'node_modules/',

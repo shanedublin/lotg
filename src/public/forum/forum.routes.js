@@ -6,6 +6,7 @@
       $stateProvider.state('forum',{
         url:"/forum",
         templateUrl:'/forum/forum.html',
+        controller: 'forumController as forum'
       });     
 
   }).run(function(headerFactory){
