@@ -2,7 +2,7 @@
 'use-strict';
 var express = require('express');
 var Forum = express.Router();
-var config = require('../../config.js');
+var config = require('./config/kyle/config.js');
 var Mongo = require('./Mongo.js');
 var MongoId = require('mongodb').ObjectID;
 

@@ -5,7 +5,7 @@
 	angular.module('lotg').service('configService',function(){
 		console.log('Config Service');
 		var config = {};
-		config.nodeAddress = 'http://localhost:3000';
+		config.nodeAddress = 'http://192.168.0.2:3000';
 		return config;
 		
 		

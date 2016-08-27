@@ -10,7 +10,8 @@ var del = require('del');
 var runSequence = require('run-sequence');
 var jshint = require('gulp-jshint');
 var nodemon = require('nodemon');
-var config = require('./config');
+var config = require('./src/server/config/kyle/config.js');
+
 
 
 

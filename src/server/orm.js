@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var config = require('../../config.js');
+var config = require('./config/kyle/config.js');
 var seq = new Sequelize(...config.databaseConnection);
 
 

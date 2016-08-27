@@ -3,7 +3,7 @@
 
 'use-strict';
 var express = require('express');
-var config = require('../../config.js');
+var config = require('./config/kyle/config.js');
 
 var MongoClient = require('mongodb').MongoClient;
 

@@ -28,13 +28,13 @@ config.defaultSequelizeSettings = {
 		timestamps: false,
 		freezeTableName: true,
 		underscored: true
-}
+};
 
 
 
 config.mongoConnection = {
 		url : 'mongodb://localhost:27017/lotg'
-}
+};
 
 
 config.nodeAddress = 'localhost:3000';

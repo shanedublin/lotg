@@ -56,7 +56,7 @@
 				angular.copy({},comment);
 				vm.edit = false;
 			});
-		}
+		};
 		
 		if($state.params.id === 'new'){
 			vm.edit = true;

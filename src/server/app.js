@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var config = require('../../config.js');
+var config = require('./config/kyle/config.js');
 
 
 var allowCrossDomain = function(req,res,next){

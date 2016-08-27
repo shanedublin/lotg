@@ -2,7 +2,7 @@
 'use-strict';
 var express = require('express');
 var Hero = express.Router();
-var config = require('../../config.js');
+var config = require('./config/kyle/config.js');
 var orm = require('./orm.js');
 var ormHero = orm.Hero;
 
