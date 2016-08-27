@@ -19,8 +19,9 @@ app.use(bodyParser.json());
 
 
 var Hero = require('./Hero');
+var Forum = require('./Forum');
 
-
+app.use('/forum',Forum);
 
 app.use('/hero',Hero);
 // redirects to home page

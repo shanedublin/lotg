@@ -31,6 +31,12 @@ config.defaultSequelizeSettings = {
 }
 
 
+
+config.mongoConnection = {
+		url : 'mongodb://localhost:27017/lotg'
+}
+
+
 config.nodeAddress = 'localhost:3000';
 
 

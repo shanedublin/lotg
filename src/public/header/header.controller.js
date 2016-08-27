@@ -1,7 +1,7 @@
 (function(){
 	'use-strict';
 	angular.module('lotg.header').controller('headerController',function(headerFactory){
-		console.log('Header Controller Loaded');
+		//console.log('Header Controller Loaded');
 		var vm = this;
 		vm.hate = 'Much Hate!';
 		vm.links = headerFactory.links;

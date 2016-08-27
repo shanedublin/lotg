@@ -1,0 +1,53 @@
+<div ng-hide="forumPost.deleted === true" class="col-md-8 col-md-offset-2" style="margin-bottom: 70px;">
+
+<h1>{{forumPost.name}}</h1>
+<!-- <pre>{{forumPost.post | json}}</pre> -->
+<div ng-if="forumPost.edit === true" class="panel panel-default">
+	<div class="panel-body">
+		<input class="form-control" placeholder="Enter title here..." ng-model="forumPost.post.title">
+		<br>
+		<textarea class="form-control" rows="3"  placeholder="Enter message body here..." ng-model="forumPost.post.message"></textarea>
+		<br>	
+		<button class="btn btn-primary pull-right" ng-click="forumPost.savePost()">Save</button>
+		<button ng-if="forumPost.post._id !== undefined" class="btn btn-danger pull-left" ng-click="forumPost.deletePost()">Delete</button>
+	</div>
+</div>
+
+
+<div ng-if="forumPost.edit === false">
+
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h2>{{forumPost.post.title}}</h2>
+			<p>{{forumPost.post.message}}</p>
+			
+			<button class="btn btn-primary pull-right" ng-click="forumPost.edit = true">Edit</button>
+		</div>
+	</div>
+	
+	<h3>Replies</h3>
+	<div class="panel panel-default" ng-repeat="item in forumPost.post.replies">
+		<div class="panel-body">
+		<label>{{item.name}}</label>
+		<p>{{item.message}}<p>
+		</div>
+	
+	</div>
+	<h3>New Comment</h3>
+	
+	<div class="panel panel-default" >
+		<div class="panel-body">
+			<textarea ng-model="comment.message" rows="4" placeholder="Enter Message here" class="form-control"></textarea>
+			<br>
+			<button class="btn btn-primary pull-right" ng-click="forumPost.saveComment(comment)">Comment</button>
+		</div>
+	</div>
+
+</div>
+
+</div>
+
+
+<div ng-show="forumPost.deleted === true" class="col-md-8 col-md-offset-2" style="margin-bottom: 70px;">
+	<h1 style="text-align: center"> {{forumPost.post.title}} has been permanently deleted</h1>
+</div>

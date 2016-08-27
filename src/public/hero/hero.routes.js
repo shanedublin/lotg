@@ -2,7 +2,7 @@
   'use-strict';
 
   angular.module('lotg.hero').config(function($stateProvider, $urlRouterProvider){
-      console.log("Hero Routes Loaded");
+    //  console.log("Hero Routes Loaded");
       
       $stateProvider.state('heroList',{
         url:"/hero/list",
@@ -19,7 +19,6 @@
 
   }).run(function(headerFactory){
 	  headerFactory.addLink({name:'Heroes',url:'#/hero/list'});
-	  console.log('wow');
   });
 
 })();

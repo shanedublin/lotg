@@ -1,7 +1,7 @@
 (function(){
 	'use-strict';
 	angular.module('lotg.hero').controller('heroListController',function(configService,$http,$state){
-		console.log('hero Controller loaded');
+		//console.log('hero Controller loaded');
 		var vm = this;
 		
 		vm.list = [];

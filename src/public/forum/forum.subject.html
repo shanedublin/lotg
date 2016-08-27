@@ -1,0 +1,33 @@
+<div class="col-md-8 col-md-offset-2" style="margin-bottom: 70px;">
+
+<div class="pull-left">
+<h1>{{forumSubject.name}}</h1>
+</div>
+<div class="pull-right">
+<h1><button class="btn btn-primary pull-right" ng-click="forumSubject.loadPost()"> Create New Post</button></h1>
+</div>
+
+		<table class="table table-hover">
+		
+			<tr>
+			<th class="col-md-3">Title</th>
+			<th class="col-md-3"  style="text-align: center">Last Comment</th>
+			<th class="col-md-1"  style="text-align: center"># Comments</th>
+			<th class="col-md-1" style="text-align: right">Stickied</th>		
+			
+			</tr>
+			<tr style="cursor: pointer" ng-repeat="item in forumSubject.posts" ng-click="forumSubject.loadPost(item)">
+			
+				<td>{{item.title}}</td>
+				<td style="text-align: center">8/26/2016</td>
+				<td style="text-align: center">2</td>
+				<td style="text-align: right"><span class="glyphicon glyphicon-ok text-success"></span></td>
+				
+			</tr>
+			
+		
+		</table>
+
+
+
+</div>

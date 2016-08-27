@@ -1,7 +1,7 @@
 (function(){
 	'use-strict';
 	angular.module('lotg.hero').controller('heroEditController',function($http,configService,$state){
-		console.log('hero Edit Controller loaded');
+		//console.log('hero Edit Controller loaded');
 		var vm = this;
 		
 		vm.h = {};		

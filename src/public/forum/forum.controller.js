@@ -1,7 +1,7 @@
 (function(){
 	'use-strict';
-	angular.module('lotg.forum').controller('forumController',function(){
-		console.log('Forum Controller loaded');
+	angular.module('lotg.forum').controller('forumController',function($location){
+		//console.log('Forum Controller loaded');
 		var vm = this;
 		
 		vm.lotg = [];
@@ -16,6 +16,11 @@
 		vm.other.push({title: 'General', description: 'Talk about what ever you want here' ,clazz:'bg-warning'});
 		vm.other.push({title: 'Other Games', description: 'What other Games do you like' ,clazz:'bg-info'});
 		
+		vm.loadSubject = function(forum){
+			console.log($location);
+			$location.path($location.$$path+'/'+forum.title);
+			
+		};
 		
 	});
 })();
