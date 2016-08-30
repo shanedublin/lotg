@@ -3,7 +3,7 @@
 
   angular.module('lotg').config(function($stateProvider, $urlRouterProvider){
      // console.log("Main Routes Loaded");
-      //$urlRouterProvider.otherwise("/home");
+      $urlRouterProvider.otherwise("/home");
       $stateProvider.state('home',{
         url:"/home",
         templateUrl:'/home/home.html',
