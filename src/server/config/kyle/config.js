@@ -21,17 +21,16 @@
 	};
 	
 	
-	if(process.env.NODE_ENV == 'developement'){		
+	if(process.env.NODE_ENV == 'developement'){
+		//console.log('waaaaaaluigi');
+		// this is th connection for local host...
 		config.mongoConnection = {
 				url : 'mongodb://192.168.0.2:27017/lotg'
 		};
-		config.databaseConnection =['lotg','shane','hate', {
-			host: '192.168.0.2',
+		config.databaseConnection =['lotg','shane','hate', {		
+			host: '192.168.0.2',			
 			dialect: 'postgres',
 			port: 5432,
-			database: 'lo2tg',
-			user: 'shane',
-			password: 'hate',		
 			pool:{
 				max: 5,
 				min: 0,
@@ -40,16 +39,14 @@
 	
 	}];
 	}else{		
+		// This is the production enviroment
 		config.mongoConnection = {
 				url : 'mongodb://localhost:27017/lotg'
 		};
-		config.databaseConnection =['lotg','shane','hate', {
+		config.databaseConnection =['lotg','shane',process.env.POSTGRES_PASSWORD, {
 			host: 'lotg.cykfhv8ar8q9.us-west-2.rds.amazonaws.com',
 			dialect: 'postgres',
-			port: 5432,
-			database: 'lo2tg',
-			user: 'shane',
-			password: process.env.POSTGRES_PASSWORD,		
+			port: 5432,					
 			pool:{
 				max: 5,
 				min: 0,
