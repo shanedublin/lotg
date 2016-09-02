@@ -4,9 +4,12 @@
      <a class="navbar-brand" href="#/home">Luck Of The Gods</a>
     </div>
 	<ul class="nav navbar-nav">
-		<li ng-repeat="item in head.links"><a href="{{item.url}}">{{item.name}}</a></li>
-		
+		<li ng-repeat="item in head.links"><a href="{{item.url}}">{{item.name}}</a></li>		
 	</ul>
+	<ul class="nav navbar-nav navbar-right">
+		<li ng-repeat="item in head.rightLinks"><a href="{{item.url}}">{{item.name}}</a></li>
+	</ul>
+	
     
   </div>
 </nav>

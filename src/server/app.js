@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var config = require('./config/kyle/config.js');
-
+var seqJoins = require('./orm/seq.joins.js');
 
 var allowCrossDomain = function(req,res,next){
 	//console.log('cors');
@@ -20,10 +20,14 @@ app.use(bodyParser.json());
 
 var Hero = require('./Hero');
 var Forum = require('./Forum');
+var Login = require('./Login');
+seqJoins.init();
 
 app.use('/forum',Forum);
-
 app.use('/hero',Hero);
+app.use('/login',Login);
+
+
 // redirects to home page
 app.get('/',function(req,res){
 	res.redirect('/index.html');

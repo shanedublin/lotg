@@ -3,13 +3,25 @@
 var express = require('express');
 var Hero = express.Router();
 var config = require('./config/kyle/config.js');
-var orm = require('./orm.js');
-var ormHero = orm.Hero;
+var ormHero = require('./orm/seq.hero.js');
+var ormPower = require('./orm/seq.power.js');
+//var orm = require('./orm.js');
+//var ormHero = orm.Hero;
+
+//ormPower.belongsTo(ormHero, {foreignKey:'hero_id'});
+//ormHero.hasMany(ormPower, {as: 'powers',foreignKey:'hero_id',onDelete: 'cascade',hooks:true });
 
 Hero.get('/',function(req,res){
+	console.log(ormPower);
+	console.log('hello');
+	
+//	ormPower.findAll().then(function(data){
+//		console.log(data[0].get());
+//		res.send([]);
+//	});
 	
 	ormHero.findAll({
-		include:[{model: orm.Power, as: 'powers'}]
+		include:[{model: ormPower, as: 'powers'}]
 	}).then(function(data){
 		res.send(data);
 	}).catch(function(err){
@@ -28,10 +40,10 @@ Hero.post('/',function(req,res){
 	
 	var h = req.body;
 		
-	ormHero.findOne({where:{id: h.id}, include:[{model: orm.Power, as: 'powers'}]}).then(function(hero){
+	ormHero.findOne({where:{id: h.id}, include:[{model: ormPower, as: 'powers'}]}).then(function(hero){
 		if(hero === null){
 			ormHero.create(h,{
-				include:[{model: orm.Power, as: 'powers'}]
+				include:[{model: ormPower, as: 'powers'}]
 			}).then(function(hero){
 				res.send(hero);
 			});
@@ -67,7 +79,7 @@ Hero.post('/power/delete',function(req,res){
 		return;
 	}
 	
-	orm.Power.findById(parseInt(p.id)).then(function(power){
+	ormPower.findById(parseInt(p.id)).then(function(power){
 		if(power === null){
 			res.send(false);
 		}else{
@@ -87,9 +99,9 @@ Hero.post('/power',function(req,res){
 		return;
 	}
 	
-	orm.Power.findById(p.id).then(function(power){
+	ormPower.findById(p.id).then(function(power){
 		if(power === null){			
-			orm.Power.create(p).then(function(newPower){
+			ormPower.create(p).then(function(newPower){
 				res.send(newPower);
 			});
 		}else{

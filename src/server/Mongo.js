@@ -7,7 +7,7 @@ var config = require('./config/kyle/config.js');
 
 var MongoClient = require('mongodb').MongoClient;
 
-console.log('Mongo Init');
+console.log('Server Mongo Init');
 var Mongo = {};
 
 

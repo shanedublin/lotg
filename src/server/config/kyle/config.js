@@ -23,6 +23,7 @@ config.databaseConnection =['lotg','shane','hate', {
 			min: 0,
 			idle: 10000
 		}
+
 }];
 config.defaultSequelizeSettings = {
 		timestamps: false,

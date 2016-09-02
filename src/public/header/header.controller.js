@@ -5,6 +5,7 @@
 		var vm = this;
 		vm.hate = 'Much Hate!';
 		vm.links = headerFactory.links;
+		vm.rightLinks = headerFactory.rightLinks;
 		
 	}).directive('lotgHeader',function(){
 		return{
@@ -15,24 +16,40 @@
 		var header = {};
 		
 		header.links = [];
+		header.rightLinks = [];
 		
 		header.addLink = function(link){
+			
+			if(header.validateLink(link)){
+				header.links.push(link);			
+			}
+				
+		};
+		
+		header.addRightLink = function(link){
+			if(header.validateLink(link)){
+				header.rightLinks.push(link);			
+			}
+		};
+		
+		header.validateLink = function(link){
 			if(link === null || link === undefined){
 				console.log('Null Link Provided');
-				return;
+				return false;
 			}
 			if(link.url === null  || link.url === undefined){
 				console.log('No URL Provided');
-				return;
+				return false;
 			}
 			if(link.name === null || link.name === undefined){
 				console.err('No name Provided!');
-				return;
+				return false;
 			}
-				
-				
-			header.links.push(link);
-		};	
+			return true;
+		};
+		
+		
+		
 		
 		return header;
 	});
