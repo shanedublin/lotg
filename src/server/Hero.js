@@ -13,7 +13,7 @@ var ormPower = require('./orm/seq.power.js');
 
 Hero.get('/',function(req,res){
 	//console.log(ormPower);
-	//console.log('hello');
+	console.log('trying to get heo list');
 	
 //	ormPower.findAll().then(function(data){
 //		console.log(data[0].get());
@@ -26,6 +26,8 @@ Hero.get('/',function(req,res){
 		console.log('hello');
 		console.log(data);
 		res.send(data);
+	},function(err){
+		console.log(err);
 	}).catch(function(err){
 		console.log(err);
 	});
