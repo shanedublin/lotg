@@ -35,7 +35,7 @@
 			port: 5432,
 			pool:{
 				max: 5,
-				min: 0,
+				min: 1,
 				idle: 10000
 			}
 	
@@ -54,7 +54,7 @@
 			port: 5432,					
 			pool:{
 				max: 5,
-				min: 0,
+				min: 1,
 				idle: 10000
 			}
 	
