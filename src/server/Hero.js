@@ -12,8 +12,8 @@ var ormPower = require('./orm/seq.power.js');
 //ormHero.hasMany(ormPower, {as: 'powers',foreignKey:'hero_id',onDelete: 'cascade',hooks:true });
 
 Hero.get('/',function(req,res){
-	console.log(ormPower);
-	console.log('hello');
+	//console.log(ormPower);
+	//console.log('hello');
 	
 //	ormPower.findAll().then(function(data){
 //		console.log(data[0].get());
@@ -23,6 +23,8 @@ Hero.get('/',function(req,res){
 	ormHero.findAll({
 		include:[{model: ormPower, as: 'powers'}]
 	}).then(function(data){
+		console.log('hello');
+		console.log(data);
 		res.send(data);
 	}).catch(function(err){
 		console.log(err);

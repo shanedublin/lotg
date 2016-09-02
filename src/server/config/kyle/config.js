@@ -27,6 +27,7 @@
 		config.mongoConnection = {
 				url : 'mongodb://192.168.0.2:27017/lotg'
 		};
+		
 		config.databaseConnection =['lotg','shane','hate', {		
 			host: '192.168.0.2',
 			//host: 'lotg.cykfhv8ar8q9.us-west-2.rds.amazonaws.com',
