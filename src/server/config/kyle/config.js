@@ -7,7 +7,25 @@
 	config.sourceFolder = 'src/public';
 	config.index = 'src/public/index.html';
 	
-	config.databaseConnection =['lotg','shane','hate', {
+	
+	
+	
+	
+	
+	
+	
+	config.defaultSequelizeSettings = {
+			timestamps: false,
+			freezeTableName: true,
+			underscored: true
+	};
+	
+	
+	if(process.env.NODE_ENV == 'developement'){		
+		config.mongoConnection = {
+				url : 'mongodb://192.168.0.2:27017/lotg'
+		};
+		config.databaseConnection =['lotg','shane','hate', {
 			host: '192.168.0.2',
 			dialect: 'postgres',
 			port: 5432,
@@ -21,21 +39,24 @@
 			}
 	
 	}];
-	config.defaultSequelizeSettings = {
-			timestamps: false,
-			freezeTableName: true,
-			underscored: true
-	};
-	
-	
-	if(process.env.NODE_ENV == 'development'){
-		config.mongoConnection = {
-				url : 'mongodb://192.168.0.2:27017/lotg'
-		};
-	}else{
+	}else{		
 		config.mongoConnection = {
 				url : 'mongodb://localhost:27017/lotg'
 		};
+		config.databaseConnection =['lotg','shane','hate', {
+			host: 'lotg.cykfhv8ar8q9.us-west-2.rds.amazonaws.com',
+			dialect: 'postgres',
+			port: 5432,
+			database: 'lo2tg',
+			user: 'shane',
+			password: process.env.POSTGRES_PASSWORD,		
+			pool:{
+				max: 5,
+				min: 0,
+				idle: 10000
+			}
+	
+	}];
 	}
 	
 	
