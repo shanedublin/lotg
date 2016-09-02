@@ -4,7 +4,7 @@ var config = require('./../config/kyle/config.js');
 
 console.log('seq Hero');
 
-var hero = {}
+var hero = {};
 
 //hero.init = function(seq){	
 //

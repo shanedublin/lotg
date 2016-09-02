@@ -4,6 +4,10 @@ var bodyParser = require('body-parser');
 var config = require('./config/kyle/config.js');
 var seqJoins = require('./orm/seq.joins.js');
 
+console.log('*****************Node Enviroment*****************');
+console.log(process.env.NODE_ENV);
+console.log('*************************************************');
+
 var allowCrossDomain = function(req,res,next){
 	//console.log('cors');
 	res.header('Access-Control-Allow-Origin', '*');

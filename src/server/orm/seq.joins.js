@@ -10,7 +10,7 @@ run.init = function init(){
 	console.log('*********');
 	power.belongsTo(hero, {foreignKey:'hero_id'});
 	hero.hasMany(power, {as: 'powers',foreignKey:'hero_id',onDelete: 'cascade',hooks:true });
-}
+};
 
 module.exports = run;
 
