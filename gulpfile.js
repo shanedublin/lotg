@@ -10,6 +10,7 @@ var del = require('del');
 var runSequence = require('run-sequence');
 var jshint = require('gulp-jshint');
 var nodemon = require('nodemon');
+var replace = require('gulp-replace');
 var config = require('./src/server/config/kyle/config.js');
 
 
@@ -55,7 +56,7 @@ gulp.task('index-inject',function build(){
 	gulp.src(config.index)
 	.pipe(inject(gulp.src(mainBowerFiles(mainBowerOverrides),{read:false}),{name: 'bower'}))
 	.pipe(inject(gulp.src('./src/public/**/*.js').pipe(angularFilesort()), {relative:true}))
-	.pipe(inject(gulp.src('./src/public/**/*.css'), {relative:true}))
+	.pipe(inject(gulp.src('./src/public/**/*.css'), {relative:true}))	
   	.on('error',logError)
 	.pipe(gulp.dest(config.buildFolder));
 })
@@ -85,17 +86,35 @@ gulp.task('clean',function clean(){
 });
 
 
+
+gulp.task('config-prod', function () {
+	  return gulp.src('src/public/config/config.service.js')
+	  .pipe(replace('gulpGoodness', 'location.origin'))
+	    .pipe(gulp.dest(config.buildFolder+'/config/'));
+	});
+
+gulp.task('config-dev', function () {
+	return gulp.src('src/public/config/config.service.js')
+	  .pipe(replace('gulpGoodness', "'http://localhost:3000'"))
+	    .pipe(gulp.dest(config.buildFolder+'/config/'));
+	});
+
 gulp.task('dev',dev);
 
 function dev(callback){
 	console.log('Running Dev Build');
 	if(callback !== null && callback !== undefined){
-		return runSequence('clean','js-hint','index-inject','src-dist','bower-dist',callback);
+		return runSequence('clean','js-hint','index-inject','src-dist','config-dev','bower-dist',callback);
 		
 	}else{
-		return runSequence('clean','js-hint','index-inject','src-dist','bower-dist');
+		return runSequence('clean','js-hint','index-inject','src-dist','config-dev','bower-dist');
 	}
 }
+
+gulp.task('prod',function(){
+	return runSequence('clean','js-hint','index-inject','src-dist','config-prod','bower-dist');
+});
+
 
 gulp.task('start',['browser-sync'],function(){	
 			dev(browserSync.reload);
