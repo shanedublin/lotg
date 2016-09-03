@@ -24,7 +24,7 @@ Hero.get('/',function(req,res){
 		include:[{model: ormPower, as: 'powers'}]
 	}).then(function(data){
 		console.log('hello');
-		console.log(data);
+		//console.log(data);
 		res.send(data);
 	},function(err){
 		console.log(err);

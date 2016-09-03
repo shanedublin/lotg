@@ -6,7 +6,7 @@
       
       $stateProvider.state('heroList',{
         url:"/hero/list",
-        templateUrl:'/hero/hero.list.html',
+        templateUrl:'/hero/hero.table.html',
         controller: 'heroListController as heroList'
       }).state('heroEdit',{
     	  url:'/hero/edit',

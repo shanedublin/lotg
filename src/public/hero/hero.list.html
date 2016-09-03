@@ -2,9 +2,10 @@
 <h3 class="text-center"><a href="#/hero/edit">Create New Hero</a></h3>
 
 <div class="container">
-		<div class="panel panel-default" ng-repeat="item in heroList.list | orderBy:name track by item.id" ng-init="item.expanded = false" >
-			<div ng-if="item.expanded !== true" class="panel-body">			
-			<h3><a href="" ng-click="item.expanded = !item.expanded">{{item.name}} {{item.id}}</a></h3>			
+
+		<div class="" ng-class="{'panel panel-default': item.expanded === true}" ng-repeat="item in heroList.list | orderBy:'name' track by item.id" ng-init="item.expanded = false" >
+			<div ng-if="item.expanded !== true">			
+			<h4><a href="" ng-click="item.expanded = !item.expanded">{{item.name}} {{item.id}}</a></h4>			
 			</div>
 			
 			

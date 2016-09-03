@@ -1,0 +1,105 @@
+
+<div  ng-class="{'col-md-8':heroList.selectedHero !== null, 'col-md-12':heroList.selectedHero === null }">
+<table class="table table-condensed table-hover">
+<tr>
+<td colspan="1"><input class="form-control" ng-model="search" placeholder="Search table..."></td>
+<th colspan="5"></th>
+<th colspan="5"><button class="btn btn-primary pull-right"  ng-click="heroList.editHero(null)" >Create New Hero</button></th>
+
+</tr>
+
+
+<tr>
+<th><a href="">Name </a></th>
+<th><a href="">Health </a></th>
+<th><a href="">Attack </a></th>
+<th><a href="">Defense </a></th>
+<th><a href="">Range </a></th>
+<th><a href="">Move </a></th>
+<th><a href="">Soul Points </a></th>
+</tr>
+
+<tr ng-repeat="item in heroList.list | filter:search | orderBy:'name' track by item.id"
+ ng-click="heroList.selectHero(item)" style="cursor: pointer;">
+	<td>{{item.name}}</td>
+	<td>{{item.health}}</td>
+	<td>{{item.attack}}</td>
+	<td>{{item.defense}}</td>
+	<td>{{item.range}}</td>
+	<td>{{item.move}}</td>
+	<td>{{item.points}}</td>
+</tr>
+
+</table>
+</div>
+
+<div class="col-md-4" ng-if="heroList.selectedHero !== null">
+	<div class="panel panel-default">
+	
+		<div class="panel-body">		
+		
+		<h2>{{heroList.selectedHero.name}} 
+			
+		<button class="btn btn-warning pull-right" 
+			ng-click="heroList.editHero(heroList.selectedHero)">Edit</button>
+		</h2>
+		
+		
+		
+		
+		
+		<p>{{heroList.selectedHero.description}}</p>
+		<div class="row">
+		<div class="col-md-6">
+			<label>God:</label>
+			{{(main.ls.gods | filter: heroList.selectedHero.godId)[0].name}}			
+			<br>
+			<label>Species: </label>
+			{{(main.ls.species | filter: heroList.selectedHero.speciesId)[0].name}}
+			<br>
+			<label>Personality:</label>
+			{{(main.ls.personality | filter: heroList.selectedHero.personalityId)[0].name}}
+			<br>
+			<label>Size</label>
+			{{(main.ls.size | filter: heroList.selectedHero.sizeId)[0].name}}					
+			<br>
+			<label>Height</label>
+			{{heroList.selectedHero.height}}					
+			<br>
+			<label>Points</label>
+			{{heroList.selectedHero.points}}		
+		
+		</div>
+		<div class="col-md-6">
+			<label>Health:</label>
+			{{heroList.selectedHero.health}}
+			<br>
+			<label>Range: </label>
+			{{heroList.selectedHero.range}}
+			<br>
+			<label>Attack:</label>
+			{{heroList.selectedHero.attack}}
+			<br>
+			<label>Defense</label>
+			{{heroList.selectedHero.defense}}		
+			<br>
+			<label>Move</label>
+			{{heroList.selectedHero.move}}
+		</div>
+		
+		</div>
+		<div ng-repeat="item in heroList.selectedHero.powers">
+			<label>{{item.name}}: </label> 
+			{{item.description}}
+			<br>			
+		</div>
+		
+		<button class="btn btn-danger pull-right" 
+			ng-click="heroList.selectHero(null)" >close</button>
+		
+		
+		</div>
+	
+	</div>
+
+</div>

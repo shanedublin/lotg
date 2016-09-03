@@ -6,7 +6,8 @@
 		
 		vm.h = {};		
 		
-		console.log($state.params.hero);
+		
+		//console.log($state.params.hero);
 		// if the hero is given set it to the object
 		if($state.params.hero !== null){
 			angular.copy($state.params.hero,vm.h);			
