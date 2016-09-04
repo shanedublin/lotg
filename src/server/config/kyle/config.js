@@ -33,6 +33,7 @@
 			//host: 'lotg.cykfhv8ar8q9.us-west-2.rds.amazonaws.com',
 			dialect: 'postgres',
 			port: 5432,
+			logging: false,
 			pool:{
 				max: 5,
 				min: 1,
@@ -51,7 +52,8 @@
 		config.databaseConnection =['lotg','shane',process.env.POSTGRES_PASSWORD, {
 			host: 'lotg.cykfhv8ar8q9.us-west-2.rds.amazonaws.com',
 			dialect: 'postgres',
-			port: 5432,					
+			port: 5432,
+			logging: false,
 			pool:{
 				max: 5,
 				min: 1,

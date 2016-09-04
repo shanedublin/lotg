@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 var seq = require('./seq.js');
 var config = require('./../config/kyle/config.js');
 
-console.log('seq Hero');
+//console.log('seq Hero');
 
 var hero = {};
 

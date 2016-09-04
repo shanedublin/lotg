@@ -1,0 +1,9 @@
+<form class="form-horizontal">
+	<h2>LOTG Login</h2>
+	<input class="form-control" type="email" placeholder="Enter Email" required ng-model="creds.email">
+	<br>
+	<input class="form-control" type="password" placeholder="Enter Password" required ng-model="creds.password">
+	<br>
+	<button class="btn btn-primary pull-right" type="submit" ng-click="login.login(creds)">Login</button>
+	<button class="btn btn-primary pull-left"  type="button" ng-click="login.loginForm = false">Sign Up</button>
+</form>

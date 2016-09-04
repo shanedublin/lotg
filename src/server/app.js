@@ -4,9 +4,12 @@ var bodyParser = require('body-parser');
 var config = require('./config/kyle/config.js');
 var seqJoins = require('./orm/seq.joins.js');
 
-console.log('*****************Node Enviroment*****************');
-console.log(process.env.NODE_ENV);
-console.log('*************************************************');
+//var userTest = require('./test/user.test.js');
+var sessionTest = require('./test/session.test.js');
+
+//console.log('*****************Node Enviroment*****************');
+//console.log(process.env.NODE_ENV);
+//console.log('*************************************************');
 
 var allowCrossDomain = function(req,res,next){
 	//console.log('cors');
@@ -24,12 +27,12 @@ app.use(bodyParser.json());
 
 var Hero = require('./Hero');
 var Forum = require('./Forum');
-var Login = require('./Login');
+var Login = require('./user/user.controller');
 seqJoins.init();
 
 app.use('/forum',Forum);
 app.use('/hero',Hero);
-app.use('/login',Login);
+app.use('/account',Login);
 
 
 // redirects to home page

@@ -1,0 +1,13 @@
+<form name="createUser" class="form-horizontal" ng-init="creds = {}">
+	<h2>LOTG Sign Up</h2>
+	<input class="form-control" type="text" required placeholder="Enter username" ng-model="creds.name">
+	<br>
+	<input class="form-control" type="email" required placeholder="Enter email" ng-model="creds.email">
+	<br>	
+	<input class="form-control" type="password" required placeholder="Enter Password" ng-model="creds.password">
+	<br>
+	<input class="form-control" type="password" required placeholder="Confirm Password" ng-model="creds.passwordConfirm">
+	<br>
+	<button class="btn btn-primary pull-right" type="submit" ng-click="login.createAccount(creds)">Create account</button>
+	<button class="btn btn-primary pull-left" type="button" ng-click="login.loginForm = true">Cancel</button>
+</form>
