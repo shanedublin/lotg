@@ -5,7 +5,7 @@ var config = require('./config/kyle/config.js');
 var seqJoins = require('./orm/seq.joins.js');
 
 //var userTest = require('./test/user.test.js');
-var sessionTest = require('./test/session.test.js');
+//var sessionTest = require('./test/session.test.js');
 
 //console.log('*****************Node Enviroment*****************');
 //console.log(process.env.NODE_ENV);
@@ -15,7 +15,7 @@ var allowCrossDomain = function(req,res,next){
 	//console.log('cors');
 	res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, token');
 
     next();
 	
@@ -28,7 +28,11 @@ app.use(bodyParser.json());
 var Hero = require('./Hero');
 var Forum = require('./Forum');
 var Login = require('./user/user.controller');
+var Authorization = require('./authorization/Authorization');
+
 seqJoins.init();
+
+app.use('/',Authorization.verify);
 
 app.use('/forum',Forum);
 app.use('/hero',Hero);

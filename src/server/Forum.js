@@ -109,7 +109,7 @@ Forum.post('/',function(req,res){
 		res.status(400).send('Can\'t save Null!');
 		return;
 	}
-	console.log(body);
+	//console.log(body);
 	
 	
 	

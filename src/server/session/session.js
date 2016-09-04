@@ -9,8 +9,8 @@ session.timeout = 1000*60*60;
 session.sessionMap = new Map();
 
 session.createSession = function(userId){
-	
-	if(userId === null)
+	//console.log(userId);
+	if(userId === null || userId === undefined)
 		throw new Error('Null User Id');
 	if(typeof userId !== 'number')
 		throw new Error('Not a Number');
@@ -23,24 +23,28 @@ session.createSession = function(userId){
 			
 	};
 	//console.log(s);
-	session.sessionMap.set(userId,s);
+	session.sessionMap.set(s.token,s);
 	return s;
 	
 };
 
-session.destroySession = function(id){
-	session.sessionMap.delete(id);
+session.destroySession = function(token){
+	session.sessionMap.delete(token);
 };
 
-session.getSession = function(userId){
-	var s = session.get(uerId,s);
+session.getSession = function(token){
+	var s = session.sessionMap.get(token,s);
+	
+	if(s === null || s === undefined){
+		throw new Error('No Such Session');
+	}
 	
 	if(session.validateSession(s)){
 		session.refreshSession(s);
 		return s;
 		
 	}else{
-		session.destroySession(userId);
+		session.destroySession(token);
 		throw new Error('Expired Token');
 	}
 	
@@ -48,11 +52,15 @@ session.getSession = function(userId){
 };
 
 session.validateSession = function(s){
-	if(s.expireTime > Date.now()){
-		return false;	
-	}else {
-		return true;
-	}
+	if(s === null || s === undefined)
+		return false;
+	
+//	console.log(s.expireTime);
+//	console.log(Date.now());
+	if(s.expireTime < Date.now())
+		return false;
+	
+	return true;
 };
 
 session.refreshSession = function(s){

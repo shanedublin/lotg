@@ -11,20 +11,15 @@ var ormPower = require('./orm/seq.power.js');
 //ormPower.belongsTo(ormHero, {foreignKey:'hero_id'});
 //ormHero.hasMany(ormPower, {as: 'powers',foreignKey:'hero_id',onDelete: 'cascade',hooks:true });
 
+/**
+ * Returns a list of all the heros
+ */
 Hero.get('/',function(req,res){
-	//console.log(ormPower);
-	console.log('trying to get heo list');
-	
-//	ormPower.findAll().then(function(data){
-//		console.log(data[0].get());
-//		res.send([]);
-//	});
-	
+	//console.log(req.lotg);
 	ormHero.findAll({
 		include:[{model: ormPower, as: 'powers'}]
 	}).then(function(data){
-		console.log('hello');
-		//console.log(data);
+		
 		res.send(data);
 	},function(err){
 		console.log(err);

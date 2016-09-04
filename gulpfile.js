@@ -121,6 +121,7 @@ gulp.task('start',['browser-sync'],function(){
 	nodemon({
 		script:'src/server/app.js',
 		ext: 'js html css',
+		delay: 1000,
 		ignore : [
 		          'bower_components/',
 		          'node_modules/',

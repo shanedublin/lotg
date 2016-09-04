@@ -3,6 +3,7 @@
 var express = require('express');
 var Login = express.Router();
 var dao = require('./user.dao.js');
+var session = require('../session/session.js');
 
 Login.post('/login',function(req,res){
 
@@ -10,10 +11,11 @@ Login.post('/login',function(req,res){
 	dao.findUser(params).then(function(value) {
 		//console.log(value.get());
 		if(value !== null){
-			dao.comparePassword(params.password,value.password).then(function(result){			
-				
+			dao.comparePassword(params.password,value.password).then(function(result){
+				//console.log(result);
 				if(result){
-					res.send('Good login');				
+					var token = session.createSession(value.id);					
+					res.send(token);				
 				}else{
 					res.status(403).send('Invalid username or password!');	
 				}
@@ -40,7 +42,8 @@ Login.post('/logout',function(req,res){
 Login.post('/create',function(req,res){
 	var params = req.body;
 	dao.createUser(params).then(function(value){
-		res.send(value);
+		var token = session.createSession(value.id);
+		res.send(token);
 	},function(reason){
 		console.error(reason);
 		res.status(400);

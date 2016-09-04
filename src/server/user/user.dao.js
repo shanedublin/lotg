@@ -54,6 +54,10 @@ dao.findUser = function findUser(params){
 	return ormUser.findOne({where: {email:params.email}});
 };
 
+dao.findUserById = function findUserById(id){
+	return ormUser.findById(id);
+};
+
 dao.checkForEmail = function checkForEmail(params){
 	return ormUser.count({where: {email: params.email}});
 };
