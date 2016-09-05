@@ -11,6 +11,16 @@ var ormPower = require('./orm/seq.power.js');
 //ormPower.belongsTo(ormHero, {foreignKey:'hero_id'});
 //ormHero.hasMany(ormPower, {as: 'powers',foreignKey:'hero_id',onDelete: 'cascade',hooks:true });
 
+function getUser(req){
+	if(req.lotg === null || req.lotg === undefined){
+		return null;
+	}
+	
+	return req.lotg.user;
+}
+
+
+
 /**
  * Returns a list of all the heros
  */
@@ -36,6 +46,13 @@ Hero.get('/',function(req,res){
  * There has got to be a better way to do this but i can't find it. * 
  */
 Hero.post('/',function(req,res){
+	
+	var user = getUser(req);
+	if(user === null){
+		res.status(403);
+		return;
+	}
+	
 	
 	var h = req.body;
 		
@@ -71,6 +88,13 @@ Hero.post('/',function(req,res){
 });
 
 Hero.post('/power/delete',function(req,res){
+	
+	var user = getUser(req);
+	if(user === null){
+		res.status(403);
+		return;
+	}
+	
 	var p = req.body;
 	
 	if(isNaN(parseInt(p.id))){
@@ -92,6 +116,13 @@ Hero.post('/power/delete',function(req,res){
 });
 
 Hero.post('/power',function(req,res){
+	var user = getUser(req);
+	if(user === null){
+		res.status(403);
+		return;
+	}
+	
+	
 	var p = req.body;
 	if(p === null){
 		res.status(400).send('Can\'t save Null!');
@@ -115,6 +146,13 @@ Hero.post('/power',function(req,res){
 });
 
 Hero.post('/delete',function(req,res){
+	
+	var user = getUser(req);
+	if(user === null){
+		res.status(403);
+		return;
+	}
+	
 	var h = req.body;
 	console.log(h);
 	if(isNaN(parseInt(h.id))){

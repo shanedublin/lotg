@@ -23,7 +23,13 @@
 			
 			service.sessionToken = null;
 		};
-		
+		service.isLoggedIn = function(){
+			if(service.sessionToken === null){
+				return false;
+			}else{
+				return true;
+			}
+		};
 		
 		return service;
 		

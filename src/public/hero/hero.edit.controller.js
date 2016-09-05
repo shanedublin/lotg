@@ -1,10 +1,14 @@
 (function(){
 	'use-strict';
-	angular.module('lotg.hero').controller('heroEditController',function($http,configService,$state){
+	angular.module('lotg.hero').controller('heroEditController',function($http,configService,$state,loginService,$location){
 		//console.log('hero Edit Controller loaded');
 		var vm = this;
 		
 		vm.h = {};		
+		
+		if(! loginService.isLoggedIn()){
+			$location.path('#/home');
+		}
 		
 		
 		//console.log($state.params.hero);

@@ -18,24 +18,34 @@
 
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<h2>{{forumPost.post.title}}</h2>
+			<strong style="font-style: italic;">{{forumPost.post.userName}}</strong>
+			<hr>
+			<label>{{forumPost.post.title}}</label>
 			<p>{{forumPost.post.message}}</p>
 			
-			<button class="btn btn-primary pull-right" ng-click="forumPost.edit = true">Edit</button>
+			<button ng-if="main.loginService.isLoggedIn()" class="btn btn-primary pull-right" ng-click="forumPost.edit = true">Edit</button>
 		</div>
 	</div>
 	
 	<h3>Replies</h3>
 	<div class="panel panel-default" ng-repeat="item in forumPost.post.replies">
 		<div class="panel-body">
-		<label>{{item.name}}</label>
+		<strong style="font-style:italic;">{{item.userName}}</strong>
+		<hr>
 		<p>{{item.message}}<p>
-		</div>
-	
+		</div>	
 	</div>
-	<h3>New Comment</h3>
 	
-	<div class="panel panel-default" >
+	<div class="panel panel-default" ng-if="forumPost.post.replies === undefined">
+		<div class="panel-body">
+			No Replies Yet!		
+		</div>
+	</div>
+	
+	
+	<h3 ng-if="main.loginService.isLoggedIn()">New Comment</h3>
+	
+	<div ng-if="main.loginService.isLoggedIn()" class="panel panel-default" >
 		<div class="panel-body">
 			<textarea ng-model="comment.message" rows="4" placeholder="Enter Message here" class="form-control"></textarea>
 			<br>

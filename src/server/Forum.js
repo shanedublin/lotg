@@ -9,15 +9,38 @@ var MongoId = require('mongodb').ObjectID;
 
 console.log('Server Forum Init');
 
+
+function getUser(req){
+	if(req.lotg === null || req.lotg === undefined){
+		return null;
+	}
+	
+	return req.lotg.user;
+}
+
+
 /**
  * This is for creating new forum posts
+ * TODO separate Commenting out into a different method
  */
 Forum.post('/post/save',function(req,res){
+	
+	var user = getUser(req);
+	if(user === null){
+		res.status(403);
+		return;
+	}
+	
+	
+	
 	var body = req.body;
 	if(body === null){
 		res.status(400).send('Can\'t save Null!');
 		return;
 	}
+	
+	
+	
 	
 	var collectionName = getCollectionName(body);	
 	var collection = Mongo.database.collection(collectionName);
@@ -27,6 +50,7 @@ Forum.post('/post/save',function(req,res){
 		if(result === null){
 			// insert new object
 			console.log("new Post");
+			body.userName = user.name;
 			collection.insertOne(body).then(function(insertResult){
 				// get the object that  was inserted
 				collection.findOne({_id: insertResult.insertedId}).then(function(post){
@@ -39,6 +63,13 @@ Forum.post('/post/save',function(req,res){
 		}else{
 			console.log("updating");
 			console.log(body);
+			try {
+				body.replies[body.replies.length -1 ].userName = user.name;
+				
+			} catch (e) {
+				console.log(e);
+			}
+			
 			collection.updateOne({_id: objectId}, {$set:{
 				title: body.title,
 				message: body.message,
@@ -59,6 +90,13 @@ Forum.post('/post/save',function(req,res){
 });
 
 Forum.post('/post/delete',function(req,res){
+	
+	
+	var user = getUser(req);
+	if(user === null){
+		res.status(403);
+		return;
+	}
 	
 	var body = req.body;
 	if(body === null){
@@ -85,7 +123,7 @@ Forum.post('/post/get',function(req,res){
 	
 	var body = req.body;
 	if(body === null){
-		res.status(400).send('Can\'t save Null!');
+		res.status(400).send('Can\'t get Null!');
 		return;
 	}
 	

@@ -5,6 +5,8 @@
 		var vm = this;
 		
 		vm.list = [];
+		vm.order = 'name';
+		vm.dir = false;
 		
 		vm.loadHeros = function(){
 			//console.log(configService.nodeAddress);
@@ -23,6 +25,14 @@
 			$state.go('heroEdit',{hero: hero});
 		};
 		
+		vm.setOrder = function(order){
+			if(vm.order === order){
+				vm.dir = !vm.dir;				
+			}else if(vm.order !== 'name'){
+				vm.dir = true;
+			}
+			vm.order = order;
+		};
 		
 		vm.selectHero = function(hero){
 			//console.log(hero);
