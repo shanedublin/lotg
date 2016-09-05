@@ -3,7 +3,8 @@
 var express = require('express');
 var Login = express.Router();
 var dao = require('./user.dao.js');
-var session = require('../session/session.js');
+var sessionManager = require('../session/session.js');
+var util = require('../util/util.js');
 
 Login.post('/login',function(req,res){
 
@@ -20,6 +21,7 @@ Login.post('/login',function(req,res){
 					res.status(403).send('Invalid username or password!');	
 				}
 			},function(err){
+				console.log(err);
 				res.status(403).send('Invalid username or password!');
 				
 			});
@@ -35,8 +37,22 @@ Login.post('/login',function(req,res){
 
 });
 
-Login.post('/logout',function(req,res){
-	res.send('k bye');
+Login.get('/logout',function(req,res){
+	//var user = util.getUser(req);
+	var token = req.get('token');
+	if(token === null || token === undefined){
+		res.status(401).send('You are not logged in!');
+		return;
+	}
+	
+	var session = sessionManager.destroySession(token);
+	if(session !== null){		
+		res.send(true);
+	}else{
+		res.send(false);
+	}
+	
+
 });
 
 Login.post('/create',function(req,res){

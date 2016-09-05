@@ -4,7 +4,7 @@
 <tr>
 <td colspan="1"><input class="form-control" ng-model="search" placeholder="Search table..."></td>
 <th colspan="5"></th>
-<th colspan="5"><button class="btn btn-primary pull-right"  ng-click="heroList.editHero(null)"  ng-if="main.loginService.sessionToken !== null">Create New Hero</button></th>
+<th colspan="5"><button class="btn btn-primary pull-right"  ng-click="heroList.editHero(null)"  ng-if="main.loginService.isLoggedIn()">Create New Hero</button></th>
 
 </tr>
 
@@ -40,7 +40,7 @@
 		
 		<h2>{{heroList.selectedHero.name}} 
 			
-		<button class="btn btn-warning pull-right" ng-if="main.loginService.sessionToken !== null"
+		<button class="btn btn-warning pull-right" ng-if="main.loginService.isLoggedIn()"
 			ng-click="heroList.editHero(heroList.selectedHero)">Edit</button>
 		</h2>
 		

@@ -20,6 +20,8 @@
 		};
 		
 		service.clearToken = function(){
+			delete($http.defaults.headers.common.token);
+			
 			
 			service.sessionToken = null;
 		};
@@ -29,6 +31,11 @@
 			}else{
 				return true;
 			}
+		};
+		
+		service.logOut = function(){
+			service.clearToken();
+			
 		};
 		
 		return service;

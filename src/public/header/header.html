@@ -6,9 +6,21 @@
 	<ul class="nav navbar-nav">
 		<li ng-repeat="item in head.links"><a href="{{item.url}}">{{item.name}}</a></li>		
 	</ul>
-	<ul class="nav navbar-nav navbar-right">
-		<li ng-repeat="item in head.rightLinks"><a href="{{item.url}}">{{item.name}}</a></li>
+<!-- 	<ul class="nav navbar-nav navbar-right"> -->
+<!-- 		<li ng-repeat="item in head.rightLinks"><a href="{{item.url}}">{{item.name}}</a></li> -->
+<!-- 	</ul> -->
+	<ul ng-if="! main.loginService.isLoggedIn()" class="nav navbar-nav navbar-right">
+		<li> <a href="#/login">Login</a></li>
 	</ul>
+	
+	
+	
+	<ul ng-if="main.loginService.isLoggedIn()" class="nav navbar-nav navbar-right">
+		
+	<li> <a href="" ng-click="main.logOut()">Logout</a></li>
+		<li class=""><a href="#/profile"> <span class="glyphicon glyphicon-user"></span> Profile</a></li>
+	</ul>
+	
 	
     
   </div>

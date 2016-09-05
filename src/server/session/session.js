@@ -29,7 +29,7 @@ session.createSession = function(userId){
 };
 
 session.destroySession = function(token){
-	session.sessionMap.delete(token);
+	return session.sessionMap.delete(token);
 };
 
 session.getSession = function(token){

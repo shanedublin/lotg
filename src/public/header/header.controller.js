@@ -7,6 +7,10 @@
 		vm.links = headerFactory.links;
 		vm.rightLinks = headerFactory.rightLinks;
 		
+		
+		
+		
+		
 	}).directive('lotgHeader',function(){
 		return{
 			templateUrl: './header/header.html',

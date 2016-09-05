@@ -39,12 +39,7 @@
 		};
 		
 		
-		
-		vm.logout  = function(creds){
-			$http.post(configService.nodeAddress + '/account/logout', creds).then(function(value) {
-				
-			});
-		};
+	
 		
 		
 	});

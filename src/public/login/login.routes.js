@@ -8,6 +8,9 @@
         url:"/login",
         templateUrl:'/login/login.html',
         controller: 'loginController as login'
+      }).state('logout',{
+    	  url:'/logout',
+    	  templateUrl: "/login/logout.html"    	  
       });
 
   }).run(function(headerFactory,$state){

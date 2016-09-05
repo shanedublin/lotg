@@ -52,9 +52,14 @@ auth.verify = function(req,res,next){
 
 			
 		} catch (e) {
-
-			console.log(e);
-			msg += chalk.yellow(' Expired Token');
+			if(e.message === 'No Such Session'){
+				msg += chalk.yellow(' Expired Token');
+				console.log(msg);
+			}else{
+				console.log(chalk.red('Problem getting Token'));
+				console.log(e);				
+			}
+			next();				
 		} 
 	
 	}

@@ -1,7 +1,8 @@
-<div class="container bg-warning">
+<div ng-if="! main.loginService.isLoggedIn()" class="container bg-warning">
 <h3>Notice</h3>
 
-You must be logged in to use all features
+You must be <a href="#/login">logged in</a>  to use all features
+
 <br>
 <p></p>
 </div>
