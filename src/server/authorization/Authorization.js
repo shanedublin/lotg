@@ -43,7 +43,7 @@ auth.verify = function(req,res,next){
 				
 				req.lotg = {
 						user: user
-				}
+				};
 				next();
 			},function(err){
 				console.log(err);
