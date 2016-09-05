@@ -18,6 +18,8 @@
 			$http.post(configService.nodeAddress + '/account/create', creds).then(function(value) {
 				console.log('Create Account');
 				console.log(value.data);
+				$location.path('#/home');
+				loginService.saveToken(value.data);
 			});
 		};
 		
