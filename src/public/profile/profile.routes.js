@@ -6,6 +6,7 @@
       $stateProvider.state('profile',{
         url:"/profile",
         templateUrl:'/profile/profile.html',
+        controller: 'profileController as profile'
       });
 
   });

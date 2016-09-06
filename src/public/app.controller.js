@@ -19,13 +19,14 @@
 //				console.log(value);
 				if(value.data === true){
 					console.log('data' + value.data);
-					$location.path('/logout');					
-					loginService.logOut();
 				}else{
 					console.error('There was an error logging out!');
-					loginService.logOut();
-					$location.path('/logout');
 				}
+				loginService.logOut();
+				$location.path('/login');					
+			},function(value){
+				loginService.logOut();
+				$location.path('/login');
 			});
 		};
 		

@@ -1,4 +1,4 @@
 (function(){
   'use-strict';
-      angular.module('lotg.login', ['ui.router']);
+      angular.module('lotg.login', ['ui.router','ngCookies']);
 })();

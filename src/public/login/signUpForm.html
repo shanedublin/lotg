@@ -1,13 +1,66 @@
 <form name="createUser" class="form-horizontal" ng-init="creds = {}">
 	<h2>LOTG Sign Up</h2>
-	<input class="form-control" type="text" required placeholder="Enter username" ng-model="creds.name">
-	<br>
-	<input class="form-control" type="email" required placeholder="Enter email" ng-model="creds.email">
-	<br>	
-	<input class="form-control" type="password" required placeholder="Enter Password" ng-model="creds.password">
-	<br>
-	<input class="form-control" type="password" required placeholder="Confirm Password" ng-model="creds.passwordConfirm">
-	<br>
-	<button class="btn btn-primary pull-right" type="submit" ng-click="login.createAccount(creds,createUser)">Create account</button>
+<!-- 	<div class="form-horizontal"></div> -->
+	
+		<div class="form-group">
+			<div class="col-md-11">
+				<input class="form-control" type="text" name="name" required placeholder="Enter username" ng-model="creds.name" 
+					ng-change="login.checkName(creds)"ng-model-options="{ debounce: 500 }">			
+			</div>
+			<label  class=" control-label col-md-1">
+				<span ng-if="login.uniqueName === false || createUser.name.$invalid" class="glyphicon glyphicon-remove text-danger"></span>
+				<span ng-if="login.uniqueName === true && createUser.name.$valid" class="glyphicon glyphicon-ok text-success"></span>
+			</label>
+			<label ng-if="login.uniqueName === false && createUser.name.$dirty" class="control-label col-md-12 text-danger" style="text-align: left;">Not a unique user name</label>
+		</div>
+
+
+	<div class="form-group">
+		<div class="col-md-11">	
+			<input class="form-control" type="email" name="email" required placeholder="Enter email" ng-model="creds.email"
+				ng-change="login.checkEmail(creds)"ng-model-options="{ debounce: 500 }">
+		</div>
+		<label  class=" control-label col-md-1">
+			<span ng-if="login.uniqueEmail === false || createUser.email.$invalid" class="glyphicon glyphicon-remove text-danger"></span>
+			<span ng-if="login.uniqueEmail === true && createUser.email.$valid" class="glyphicon glyphicon-ok text-success"></span>
+		</label>
+		<label ng-if="login.uniqueEmail === false && createUser.email.$dirty" class="control-label col-md-12 text-danger" style="text-align: left;">Email address already in use!</label>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-md-11">
+			<input class="form-control" type="password" name="password"  required placeholder="Enter Password" ng-model="creds.password"
+			ng-model-options="{ debounce: 500 }">
+		</div>
+		<label  class=" control-label col-md-1">
+			<span ng-if="login.checkPassword(creds) === false || createUser.password.$invalid" class="glyphicon glyphicon-remove text-danger"></span>
+			<span ng-if="login.checkPassword(creds) === true && createUser.password.$valid" class="glyphicon glyphicon-ok text-success"></span>
+		</label>
+		<label ng-if="login.checkPassword(creds) === false && createUser.password.$dirty" class="control-label col-md-12 text-danger" style="text-align: left;">Password must be more than 7 characters!</label>
+		
+	</div>
+	
+	<div class="form-group">
+		<div class="col-md-11">
+			<input class="form-control" name="confirmPassword" type="password" required placeholder="Confirm Password" ng-model="creds.confirmPassword"
+			ng-model-options="{ debounce: 500 }">
+		</div>
+		<label  class=" control-label col-md-1">
+			<span ng-if="login.checkConfirmPassword(creds) === false || createUser.confirmPassword.$invalid" class="glyphicon glyphicon-remove text-danger"></span>
+			<span ng-if="login.checkConfirmPassword(creds) === true && createUser.confirmPassword.$valid" class="glyphicon glyphicon-ok text-success"></span>
+		</label>
+		<label ng-if="login.checkConfirmPassword(creds) === false && createUser.confirmPassword.$dirty" class="control-label col-md-12 text-danger" style="text-align: left;">Passwords do not match!</label>
+	</div>
+
+	<div class="checkbox"  ng-init="stayLoggedIn = false">
+	    <label>
+	      <input type="checkbox" ng-model="stayLoggedIn">Stay Logged In
+	    </label>
+  	</div>
+  	 
+  	<br>
+  	
+	<button class="btn btn-primary pull-right" type="submit" ng-disabled="login.formValid(creds,createUser) === false" 
+		ng-click="login.createAccount(creds,createUser,stayLoggedIn)">Create account</button>
 	<button class="btn btn-primary pull-left" type="button" ng-click="login.loginForm = true">Cancel</button>
 </form>

@@ -75,11 +75,11 @@ Login.post('/create',function(req,res){
 Login.post('/username',function(req,res){
 	var r = req.body;
 	
-	userDao.checkForname({name: r.name}).then(function(data){
+	dao.checkForName({name: r.name}).then(function(data){
 		if( data > 0){
-			return false;
+			res.send( false);
 		}else{
-			return true;
+			res.send(true);
 		}
 	});
 });
@@ -92,13 +92,31 @@ Login.post('/username',function(req,res){
  */
 Login.post('/email',function(req,res){
 	var r = req.body;
-	userDao.checkForEmail({email: r.email}).then(function(data){
+	dao.checkForEmail({email: r.email}).then(function(data){
 		if( data > 0){
-			return false;
+			res.send( false);
 		}else{
-			return true;
+			res.send(true);
 		}
 	});
+});
+
+Login.get('/profile',function(req,res){
+	var user = util.getUser(req);
+	if(user === null){
+		res.status(403);
+		return;
+	}
+	
+	var profile = {
+			name: user.name,
+			id: user.id,
+			email: user.email
+	};
+	
+	res.send(profile);	
+	
+	
 });
 
 

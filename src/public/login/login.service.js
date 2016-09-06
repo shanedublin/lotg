@@ -2,15 +2,17 @@
 	'use-strict';
 	
 	
-	angular.module('lotg.login').service('loginService',function($http,configService,$location){
+	angular.module('lotg.login').service('loginService',function($http,configService,$location,$cookieStore){
 		
 		var service = {};
 		
 		service.sessionToken = null;
 		
-		service.saveToken = function(token){
-			console.log();
-//			var $httpProvider = $injector.get('$httpProvider');
+		service.saveToken = function(token,stayLoggedIn){
+			
+			if(stayLoggedIn === true){
+				$cookieStore.put('token',token);
+			}
 			
 			$http.defaults.headers.common = {
 					'token': token.token
@@ -22,6 +24,7 @@
 		service.clearToken = function(){
 			delete($http.defaults.headers.common.token);
 			
+			$cookieStore.remove('token');
 			
 			service.sessionToken = null;
 		};
@@ -37,6 +40,23 @@
 			service.clearToken();
 			
 		};
+		
+		
+		service.init = function(){
+			
+			try {
+				var t = $cookieStore.get('token');
+//				console.log('serivec init');
+//				console.log(t);
+				if(t !== null && t !== undefined){
+					service.saveToken(t);
+				}				
+			} catch (e) {
+				console.log(e);
+				$cookieStore.remove('token');
+			}
+		};
+		service.init();
 		
 		return service;
 		
