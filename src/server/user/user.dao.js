@@ -10,6 +10,8 @@ dao = {};
 
 dao.createUser = function createUser(params){
 	// searches for a user that matches either of the params
+	
+	
 	return ormUser.findOne({where: {$or: {email:params.email, name: params.name }}}).then(function(data){
 		
 		if(! dao.acceptablePassword(params.password)){

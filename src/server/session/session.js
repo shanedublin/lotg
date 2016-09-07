@@ -33,14 +33,16 @@ session.destroySession = function(token){
 };
 
 session.getSession = function(token){
+	//console.log('Getting Session');
 	var s = session.sessionMap.get(token,s);
-	
+	//console.log('Found Session');
 	if(s === null || s === undefined){
 		throw new Error('No Such Session');
 	}
 	
 	if(session.validateSession(s)){
 		session.refreshSession(s);
+		//console.log('Returring Session');
 		return s;
 		
 	}else{

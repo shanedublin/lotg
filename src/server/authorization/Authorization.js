@@ -11,15 +11,17 @@ console.log("Server Authorization Init");
 //auth.all('/',);
 
 auth.verify = function(req,res,next){
+
 	
+	var msg = chalk.blue(req.originalUrl);
+	//console.log(req.method);
 	if(req.method === 'OPTIONS'){
+		msg += chalk.yellow(' Options');
+		console.log(msg);
 		next();
 		return;
 	}
-	//console.log(req.params);
-	//console.log(req.get('token'));
-	var msg = chalk.blue(req.originalUrl);
-	
+
 	var token = req.get('token');
 	if(token === undefined || token=== null){		
 		
@@ -28,9 +30,9 @@ auth.verify = function(req,res,next){
 		
 		//console.log('No Token Provided');
 		next();
+		return;
 		
 	}else{
-		
 	
 	
 		try {
@@ -45,9 +47,11 @@ auth.verify = function(req,res,next){
 						user: user
 				};
 				next();
+				return;
 			},function(err){
 				console.log(err);
 				next();
+				return;
 			});
 
 			
@@ -59,7 +63,8 @@ auth.verify = function(req,res,next){
 				console.log(chalk.red('Problem getting Token'));
 				console.log(e);				
 			}
-			next();				
+			next();		
+			return;
 		} 
 	
 	}

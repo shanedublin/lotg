@@ -3,7 +3,7 @@
 	
 	
 	angular.module('lotg.profile').controller('profileController',function($http,configService,loginService,$location){
-		//console.log('main Controller loaded');
+		console.log('profile Controller loaded');
 		
 		
 		
@@ -20,6 +20,8 @@
 		
 		vm.profile = {};
 		vm.loadProfile = function(){
+			//console.log('Loading profile');
+			vm.changePassword = false;
 			$http.get(configService.nodeAddress + '/account/profile').then(function(value) {
 				console.log(value.data);
 				angular.copy(value.data, vm.profile);

@@ -102,19 +102,37 @@ Login.post('/email',function(req,res){
 });
 
 Login.get('/profile',function(req,res){
+	//console.log('Profile');
 	var user = util.getUser(req);
 	if(user === null){
 		res.status(403);
 		return;
 	}
+	//console.log('Profile2');
 	
 	var profile = {
 			name: user.name,
 			id: user.id,
 			email: user.email
 	};
+	//console.log('Profile3');
 	
 	res.send(profile);	
+	//console.log('profile4');
+	
+	
+});
+// updates user
+Login.post('/profile',function(req,res){
+	var r = req.body;
+	var user = util.getUser(req);
+	if(user === null){
+		res.status(403);
+		return;
+	}
+	
+	//TODO
+	
 	
 	
 });

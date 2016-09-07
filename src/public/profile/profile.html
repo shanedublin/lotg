@@ -1,34 +1,40 @@
 <div class="col-md-4 col-md-offset-4" style="margin-bottom: 70px;">
 <form name="profileForm">
 <h1>Profile</h1>
+<strong>You are unable to change your information at this time.</strong>
+<br>
 <br>
 	
 	<label>User Name</label>
 	<input class="form-control" required ng-model="profile.profile.name" placeholder="Enter user name...">
+	<br>
 	<label>Email</label>
 	<input class="form-control" type="email" required ng-model="profile.profile.email" placeholder="Enter email address...">
 	
 	<br>
 
-	<button type="button" ng-if="profile.changePassword === false" class="btn btn-primary" ng-click="profile.changePassword = true">Change Password</button>
+	<div ng-if="profile.changePassword === false" >
+		<button type="button" class="btn btn-primary" ng-click="profile.changePassword = true">Change Password</button>
+		<br>
+	</div>
 <!-- 	<br> -->
-	<br>
 	<div ng-if="profile.changePassword === true">
 		<label>Current Password</label>
-		<input class="form-control" ng-model="profile.profile.currentPassword" placeholder="Enter current password..">
+		<input class="form-control" ng-model="profile.profile.currentPassword" required placeholder="Enter current password..">
+		<br>
 		
 		<label>New Password</label>
-		<input class="form-control" ng-model="profile.profile.password" placeholder="Enter new password...">
-		
+		<input class="form-control" ng-model="profile.profile.password" required placeholder="Enter new password...">
+		<br>
 		<label>Confirm New Password</label>
-		<input class="form-control" ng-model="profile.profile.confirmPassword" placeholder="Enter new password...">
+		<input class="form-control" ng-model="profile.profile.confirmPassword" required placeholder="Enter new password...">
 		
 	</div>
 
 
 <br>
-<button class="btn btn-primary pull-right" type="submit" ng-click="profile.save()">Save</button>
-<button class="btn btn-primary pull-left" type="button" ng-click="profile.load()">Cancel</button>
+<button class="btn btn-primary pull-right" type="submit" ng-disabled="profileForm.$invalid" ng-click="profile.save()">Save</button>
+<button class="btn btn-primary pull-left" type="button" ng-click="profile.loadProfile()">Cancel</button>
 
 
 
