@@ -20,6 +20,9 @@ user = seq.define('user',{
 		field: 'profile_id'
 		
 	},
+	points:{
+		type: Sequelize.INTEGER
+	},
 	password:{
 		type: Sequelize.STRING
 	}

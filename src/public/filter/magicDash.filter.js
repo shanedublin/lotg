@@ -6,9 +6,9 @@
 		//console.log('Config Service');
 		
 		return function(input,option){
-			console.log(input);
+			//console.log(input);
 			if(input === null || input === undefined){
-				console.log(option);
+				//console.log(option);
 				if(option !== null  && option !== undefined){
 					return option;
 				}

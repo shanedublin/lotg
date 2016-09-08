@@ -8,6 +8,7 @@
 		var vm = this;
 		
 		vm.heroes = [];
+		vm.points = 0;
 		vm.loadHeroes = function(){
 			$http.get(configService.nodeAddress +'/store/heroes').then(function(value) {
 				vm.heroes = value.data;
@@ -19,16 +20,30 @@
 		};
 		
 		
-		vm.purchaseHero = function(hero){
-			$http.post(configService.nodeAddress + '/store/heores',hero).then(function(value){
+		vm.buyHero = function(hero){
+			$http.post(configService.nodeAddress + '/store/heroes/buy',hero).then(function(value){
 				console.log(value.data);
-				vm.loadHeros();
+				vm.loadHeroes();
+				vm.loadPoints();
 				//did this  
 			});
 		};
 		
+		vm.loadPoints = function(){
+			
+//			if(loginService.isLoggedIn()){
+				$http.get(configService.nodeAddress +'/account/sp').then(function(value) {
+					//console.log('points');
+					//console.log(value);
+					vm.points = value.data;
+				});				
+//			}else{
+//				vm.poins = 0;
+//			}	
+		};
 		
 		
+		vm.loadPoints();
 		vm.loadHeroes();
 	
 	});

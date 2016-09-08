@@ -137,6 +137,22 @@ Login.post('/profile',function(req,res){
 	
 });
 
+Login.get('/sp',function(req,res){
+	
+	var user = util.getUser(req);
+	var points = 0;
+	if(user === null){
+		res.status(403).send('Not Logged in!');
+		
+	}else{
+		console.log(user.points);
+		res.json(user.points);
+	}
+	
+	
+	
+	
+});
 
 console.log('Server Login Init');
 

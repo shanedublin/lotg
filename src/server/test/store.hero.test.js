@@ -21,7 +21,7 @@ try {
 //	ormHero.findAll().then(function(heroes){
 //		dao.generateStoreEntries(heroes);
 //	});
-	
+//	
 	dao.purchaseHero(23,30).then(function(data){
 		console.log(data.get());
 	});

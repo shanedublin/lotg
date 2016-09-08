@@ -14,7 +14,7 @@ seqJoins.init();
 
 //var userTest = require('./test/user.test.js');
 //var sessionTest = require('./test/session.test.js');
-var heroTest = require('./test/store.hero.test.js');
+//var heroTest = require('./test/store.hero.test.js');
 
 //console.log('*****************Node Enviroment*****************');
 //console.log(process.env.NODE_ENV);

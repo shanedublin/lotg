@@ -82,14 +82,14 @@
 		
 		
 		vm.login = function(creds,form,stayLoggedIn){
-			console.log(creds);
+		//	console.log(creds);
 			if(form.$invalid){
 				return;			
 			}
 			
 			$http.post(configService.nodeAddress + '/account/login', creds).then(function(value) {
 				console.log('Logged in');
-				console.log(value.data);
+			//	console.log(value.data);
 				$location.path('#/home');
 				loginService.saveToken(value.data,stayLoggedIn);
 			});

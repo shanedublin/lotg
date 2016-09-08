@@ -5,20 +5,21 @@
 	<div class="form-horizontal">
 		<div class="form-group">
 			<div class="col-md-8">
-				<input class="form-control" placeholder="Search...">		
+				<input class="form-control" placeholder="Search..." ng-model="search">		
 			</div>
 			
 			<div class="col-md-2">
-				<select class="form-control">
-				<option>A-Z</option>
-				<option>Owned</option>
-				<option>Points</option>
-				<option>Popularity</option>
+<!-- 			<label class="control-label">Order: </label> -->
+				<select class="form-control" ng-model="order" ng-init="order = 'heroName'">
+				<option value="heroName">A-Z</option>
+				<option value="quantity">Owned</option>
+				<option value="soulPoints">Soul Points</option>
+<!-- 				<option>Popularity</option> -->
 				</select>
 			</div>
 			
 			<div style="text-align: left !important" class="col-md-2">
-				<label  class="control-label">SP: 0</label>
+				<label  class="control-label">SP: {{store.points}}</label>
 			</div>
 		
 		</div>
@@ -27,18 +28,19 @@
 	
 <div class="row">
 
-	<div  class="col-md-2" ng-repeat="item in store.heroes">
+	<div  class="col-md-2" ng-repeat="item in store.heroes | orderBy: order | filter:search">
 		<div class="panel panel-default">
-			<div class="panel-body">
+			<div class="panel-body">			
 			
-			<label>{{item.hero.name}}</label>
+			<label>{{item.heroName}}</label>
 			<hr>
-			<label>SP : {{item.soulPoints}}</label>
+			<label>SP : {{item.soulPoints }}</label>
 			<br>
-			<label>Owned : 0 </label>
+			<label>Owned : {{item.quantity| magicDashFilter:0}} </label>
+			<label class="pull-right">Max : {{item.max}}</label>
 			
 			<br>
-			<button class="btn btn-block btn-primary" ng-disabled="! main.loginService.isLoggedIn()">Buy</button>
+			<button class="btn btn-block btn-primary" ng-disabled="! main.loginService.isLoggedIn() || item.soulPoints > store.points || item.quantity >= item.max" ng-click="store.buyHero(item)">Buy</button>
 			</div>
 		
 		</div>
