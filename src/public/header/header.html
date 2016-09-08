@@ -1,7 +1,7 @@
 <nav  class="navbar navbar-inverse navbar-static-top">
   <div class="container-fluid">
     <div class="navbar-header">
-     <a class="navbar-brand" href="#/home">Luck Of The Gods</a>
+    	<a class="navbar-brand" href="#/home">Luck Of The Gods</a>
     </div>
 	<ul class="nav navbar-nav">
 		<li ng-repeat="item in head.links"><a href="{{item.url}}">{{item.name}}</a></li>		
@@ -10,15 +10,14 @@
 <!-- 		<li ng-repeat="item in head.rightLinks"><a href="{{item.url}}">{{item.name}}</a></li> -->
 <!-- 	</ul> -->
 	<ul ng-if="! main.loginService.isLoggedIn()" class="nav navbar-nav navbar-right">
-		<li> <a href="#/login">Login</a></li>
+		<li><a href="#/login">Login</a></li>
 	</ul>
 	
 	
 	
-	<ul ng-if="main.loginService.isLoggedIn()" class="nav navbar-nav navbar-right">
-		
-	<li> <a href="" ng-click="main.logOut()">Logout</a></li>
-		<li class=""><a href="#/profile"> <span class="glyphicon glyphicon-user"></span> Profile</a></li>
+	<ul ng-if="main.loginService.isLoggedIn()" class="nav navbar-nav navbar-right">		
+		<li> <a href="" ng-click="main.logOut()">Logout</a></li>
+		<li class=""><a href="#/profile"> <span class="glyphicon glyphicon-user"></span> Profiles</a></li>
 	</ul>
 	
 	

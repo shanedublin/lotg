@@ -4,8 +4,17 @@ var bodyParser = require('body-parser');
 var config = require('./config/kyle/config.js');
 var seqJoins = require('./orm/seq.joins.js');
 
+var Hero = require('./Hero');
+var Forum = require('./Forum');
+var Login = require('./user/user.controller');
+var Store = require('./store/store.controller');
+var Authorization = require('./authorization/Authorization');
+
+seqJoins.init();
+
 //var userTest = require('./test/user.test.js');
 //var sessionTest = require('./test/session.test.js');
+var heroTest = require('./test/store.hero.test.js');
 
 //console.log('*****************Node Enviroment*****************');
 //console.log(process.env.NODE_ENV);
@@ -25,18 +34,14 @@ app.use(allowCrossDomain);
 app.use(bodyParser.json());
 
 
-var Hero = require('./Hero');
-var Forum = require('./Forum');
-var Login = require('./user/user.controller');
-var Authorization = require('./authorization/Authorization');
 
-seqJoins.init();
 
 app.use('/',Authorization.verify);
 
 app.use('/forum',Forum);
 app.use('/hero',Hero);
 app.use('/account',Login);
+app.use('/store',Store);
 
 
 // redirects to home page

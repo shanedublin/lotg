@@ -1,0 +1,69 @@
+<div class="col-md-12" style="margin-bottom: 70px;">
+
+	<h1>Store </h1>
+	
+	<div class="form-horizontal">
+		<div class="form-group">
+			<div class="col-md-8">
+				<input class="form-control" placeholder="Search...">		
+			</div>
+			
+			<div class="col-md-2">
+				<select class="form-control">
+				<option>A-Z</option>
+				<option>Owned</option>
+				<option>Points</option>
+				<option>Popularity</option>
+				</select>
+			</div>
+			
+			<div style="text-align: left !important" class="col-md-2">
+				<label  class="control-label">SP: 0</label>
+			</div>
+		
+		</div>
+	</div>
+	
+	
+<div class="row">
+
+	<div  class="col-md-2" ng-repeat="item in store.heroes">
+		<div class="panel panel-default">
+			<div class="panel-body">
+			
+			<label>{{item.hero.name}}</label>
+			<hr>
+			<label>SP : {{item.soulPoints}}</label>
+			<br>
+			<label>Owned : 0 </label>
+			
+			<br>
+			<button class="btn btn-block btn-primary" ng-disabled="! main.loginService.isLoggedIn()">Buy</button>
+			</div>
+		
+		</div>
+	</div>
+</div>	
+		
+
+</div>
+
+
+<!-- <div class="col-md-4"> -->
+<!-- <h1>Hero Info</h1> -->
+<!-- <div class="panel panel-default"> -->
+<!-- 		<div class="panel-body"> -->
+
+<!-- 		Hero Name -->
+<!-- 		<br> -->
+<!-- 		Soul Points :  -->
+<!-- 		<br> -->
+<!-- 		Owned : 0 -->
+<!-- 		<br> -->
+			
+<!-- 	</div> -->
+<!-- 	</div> -->
+<!-- <div class="well"> -->
+
+<!-- </div> -->
+<!-- </div> -->
