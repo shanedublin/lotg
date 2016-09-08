@@ -50,6 +50,7 @@ gulp.task('browser-sync',function(){
 		}
 		
 	});
+	gulp.watch("src/public/**",['dev']);
 });
 
 gulp.task('index-inject',function build(){
@@ -103,11 +104,9 @@ gulp.task('dev',dev);
 
 function dev(callback){
 	console.log('Running Dev Build');
-	if(callback !== null && callback !== undefined){
-		return runSequence('clean','js-hint','index-inject','src-dist','config-dev','bower-dist',callback);
-		
-	}else{
-		return runSequence('clean','js-hint','index-inject','src-dist','config-dev','bower-dist');
+	runSequence('clean','js-hint','index-inject','src-dist','config-dev','bower-dist',browserSync.reload);
+	if(callback !== null && callback !== undefined){	
+		callback();		
 	}
 }
 
@@ -125,12 +124,13 @@ gulp.task('start',['browser-sync'],function(){
 		ignore : [
 		          'bower_components/',
 		          'node_modules/',
-		          'build/'
+		          'build/',
+		          'src/public/'
 		          ],
 		env: {'NODE_ENV': 'developement'}
 			
 	}).on('restart',function(){
-		dev(browserSync.reload);
+		//dev(browserSync.reload);
 	})
 	.on('start',function(){		
 		//browserSync.reload();

@@ -18,6 +18,17 @@
 			});
 		};
 		
+		
+		vm.purchaseHero = function(hero){
+			$http.post(configService.nodeAddress + '/store/heores',hero).then(function(value){
+				console.log(value.data);
+				vm.loadHeros();
+				//did this  
+			});
+		};
+		
+		
+		
 		vm.loadHeroes();
 	
 	});

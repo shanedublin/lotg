@@ -26,17 +26,7 @@ try {
 		console.log(data.get());
 	});
 	
-//	var it = dao.promise();
-//	//console.log(it);
-//	//console.log(next());
-//	var p = it.next().value;
-//	p.then(function(text){
-//		console.log(text[0].get());
-//		it.next(text);
-//	},function(err){
-//		console.log(err);
-//		it.throw(err);
-//	});
+
 	
 } catch (e) {
 	console.log(chalk.red(e));
