@@ -31,15 +31,15 @@
 		
 		vm.loadPoints = function(){
 			
-//			if(loginService.isLoggedIn()){
+			if(loginService.isLoggedIn()){
 				$http.get(configService.nodeAddress +'/account/sp').then(function(value) {
 					//console.log('points');
 					//console.log(value);
 					vm.points = value.data;
 				});				
-//			}else{
-//				vm.poins = 0;
-//			}	
+			}else{
+				vm.points = 0;
+			}	
 		};
 		
 		

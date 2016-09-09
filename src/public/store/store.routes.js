@@ -20,7 +20,7 @@
       });
 
   }).run(function(headerFactory){
-	  headerFactory.addLink({name:'Store',url:'#/store'});
+	  headerFactory.addLink({name:'Store',url:'#/store/heroes'});
   });
 
 })();
